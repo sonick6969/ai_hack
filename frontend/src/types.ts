@@ -1,0 +1,227 @@
+export type Equipment = {
+  id: string;
+  client: string;
+  address: string;
+  model: string;
+  serial: string;
+  installed_at: string;
+  last_visit: string | null;
+  history: string;
+  source_ref: string;
+  source: string;
+};
+export type Check = {
+  key: string;
+  label: string;
+  passed: boolean;
+  detail: string;
+  rule: string;
+};
+export type Question = {
+  key: string;
+  question: string;
+  hint: string;
+  suggested: string;
+  answer: string;
+  resolved: boolean;
+};
+export type Warranty = {
+  required: boolean;
+  reason: string;
+  uncertainties: string[];
+};
+export type Analysis = {
+  models: string[];
+  serials: string[];
+  codes: string[];
+  symptoms: string[];
+  facts: Record<string, string>;
+  unsafe_request: boolean;
+  evidence: {
+    field: string;
+    quote: string;
+    source_ref?: string;
+    provider?: string;
+  }[];
+  engine?: string;
+  llm_status?: string;
+  latency_ms?: number;
+};
+export type Message = {
+  id: number;
+  external_id: string | null;
+  sender: string;
+  channel: string;
+  text: string;
+  received_at: string;
+  source_ref: string;
+  source: string;
+  analysis: Analysis;
+};
+export type Plan = {
+  id: number;
+  sku: string;
+  name: string;
+  models: string[];
+  warehouse: string;
+  quantity: number;
+  free: number;
+  reserved_quantity: number;
+  compatible: boolean;
+  transfer_required: boolean;
+  transfer_confirmed: boolean;
+  available_on: string | null;
+  transfer_note: string;
+};
+export type Stock = {
+  sku: string;
+  name: string;
+  models: string[];
+  warehouse: string;
+  on_hand: number;
+  external_reserved: number;
+  pilot_reserved: number;
+  free: number;
+  compatible: boolean | null;
+  source_ref: string;
+};
+export type Approval = {
+  name: string;
+  note: string;
+  at: string;
+  revision: number;
+};
+export type TicketData = {
+  issue_types?: string[];
+  equipment_confirmed?: boolean;
+  address_confirmed?: boolean;
+  symptom?: string;
+  symptom_confirmed?: boolean;
+  answers?: Record<string, string>;
+  purpose?: string;
+  purpose_note?: string;
+  plan_confirmed?: boolean;
+  visit_date?: string;
+  uncertainties?: string;
+  approval?: Approval;
+  identity_resolution?: string;
+  duplicate_resolution?: string;
+  manager_note?: string;
+};
+export type Duplicate = {
+  id: number;
+  label: string;
+  revision: number;
+  sender: string;
+  text: string;
+  reason: string;
+  external_id: string | null;
+};
+export type Ticket = {
+  id: number;
+  label: string;
+  revision: number;
+  source: string;
+  state: string;
+  prepared_revision: number | null;
+  prepared_at: string | null;
+  equipment_id: string | null;
+  created_at: string;
+  updated_at: string;
+  data: TicketData;
+  messages: Message[];
+  analysis: Analysis;
+  matching: {
+    status: string;
+    reason: string;
+    client_typo: boolean;
+    candidates: (Equipment & { reasons: string[] })[];
+  };
+  equipment: Equipment | null;
+  plans: Plan[];
+  duplicates: Duplicate[];
+  symptom_labels: string[];
+  error_codes: { code: string; meaning: string; known: boolean }[];
+  readiness: {
+    can_prepare: boolean;
+    ready: boolean;
+    checks: Check[];
+    blockers: Check[];
+    passed: number;
+    total: number;
+    questions: Question[];
+    warranty: Warranty;
+    status: string;
+  };
+};
+export type TicketRow = Pick<
+  Ticket,
+  "id" | "label" | "revision" | "equipment" | "source" | "symptom_labels"
+> & {
+  sender: string;
+  text: string;
+  received_at: string;
+  channel: string;
+  message_count: number;
+  external_ids: string[];
+  status: string;
+  can_prepare: boolean;
+  blockers: Check[];
+  warranty: boolean;
+  duplicate_count: number;
+  sources: string[];
+};
+export type Summary = {
+  messages: number;
+  tickets: number;
+  equipment: number;
+  parts: number;
+  ready: number;
+  blocked: number;
+  manager: number;
+  warranty: number;
+  case_available: boolean;
+};
+export type ImportReport = {
+  id: number;
+  filename: string;
+  sha256: string;
+  source: string;
+  created_at: string;
+  duplicate_file: boolean;
+  counts: Record<string, number>;
+  created: Record<string, number>;
+  skipped: number;
+  errors: { cell: string; message: string }[];
+  warnings: { cell: string; message: string }[];
+  status: string;
+};
+export type Audit = {
+  id: number;
+  ticket_id: number | null;
+  action: string;
+  actor: string;
+  details: unknown;
+  created_at: string;
+};
+export type EngineerCard = {
+  label: string;
+  revision: number;
+  ready: boolean;
+  prepared_at: string | null;
+  equipment: Equipment | null;
+  symptom: string;
+  symptom_confirmed: boolean;
+  confirmed: string[];
+  history: { date: string | null; text: string; source_ref: string | null };
+  parts: Plan[];
+  purpose: string;
+  purpose_note: string;
+  visit_date: string | null;
+  uncertainties: string[];
+  blockers: Check[];
+  warranty: Warranty;
+  approval: Approval | null;
+  messages: Message[];
+  error_codes: { code: string; meaning: string; known: boolean }[];
+};

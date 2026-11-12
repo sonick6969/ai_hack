@@ -1,0 +1,33 @@
+
+> coffee-service-dispatch@1.0.0 build
+> tsc -b && vite build
+
+vite v6.4.6 building for production...
+transforming...
+✓ 1583 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.76 kB │ gzip:  0.48 kB
+dist/assets/index-CSf0G5HC.css   43.40 kB │ gzip: 10.07 kB
+dist/assets/index-Cr28-fCh.js   309.00 kB │ gzip: 91.95 kB
+✓ built in 1.31s
+Изолированная база и лог: /home/vladimir/ai_hack/artifacts/browser-LU6IgD
+
+> coffee-service-dispatch@1.0.0 test:e2e
+> playwright test
+
+
+Running 8 tests using 1 worker
+
+(node:2586224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/pilot.spec.ts:11:1 › Excel: загрузка настоящего файла, отчёт и повтор без дублей (714ms)
+  ✓  2 e2e/pilot.spec.ts:50:1 › Очередь: поиск, фильтры, пустой результат и точная машина (1.2s)
+  ✓  3 e2e/pilot.spec.ts:74:1 › Незнакомый текст: машина, ответы, реальный резерв, готовность, PDF и изменение (2.4s)
+  ✓  4 e2e/pilot.spec.ts:263:1 › Нулевой остаток: настоящий отказ резерва виден диспетчеру (866ms)
+  ✓  5 e2e/pilot.spec.ts:288:1 › Неизвестная машина остаётся вне реестра и передаётся менеджеру (770ms)
+  ✓  6 e2e/pilot.spec.ts:321:1 › Уточнение по той же течи объединяется с сохранением исходных сообщений (977ms)
+  ✓  7 e2e/pilot.spec.ts:350:1 › Узкий экран: навигация, поля и карточка не выходят за ширину (577ms)
+  ✓  8 e2e/pilot.spec.ts:379:1 › Ошибка сети: явная ошибка и восстановление очереди (465ms)
+
+  8 passed (8.7s)

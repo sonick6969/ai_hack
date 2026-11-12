@@ -1,0 +1,1184 @@
+{
+  "version": 1,
+  "source_sha256": "152de2da65aa662c6229e7eefc3479432e35f13310e0ded7caa3e4d70aced70b",
+  "label_status": "Literal identifiers and registry cells are machine-verifiable; symptom classes and address/client interpretation await independent expert review.",
+  "records": [
+    {
+      "id": "З-01",
+      "split": "case",
+      "sender": "Кафе «Кедр», администратор",
+      "text": "Кофемашина опять течёт снизу, приезжайте как в прошлый раз. Какая из двух — уточню у смены.",
+      "source_ref": "Заявки!D4:E4",
+      "expected_ids": [
+        "EQ01",
+        "EQ02"
+      ],
+      "expected_status": "ambiguous",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "101",
+          "model": "C100",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A4:H4",
+          "id": "EQ01"
+        },
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-02",
+      "split": "case",
+      "sender": "Гостиница «Берег», служба питания",
+      "text": "После мойки не выдаёт кофе. Питание включено, на экране код ошибки, но его не записали.",
+      "source_ref": "Заявки!D5:E5",
+      "expected_ids": [
+        "EQ03"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "108",
+          "model": "C100",
+          "client": "Гостиница «Берег»",
+          "source_ref": "Оборудование!A6:H6",
+          "id": "EQ03"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-03",
+      "split": "case",
+      "sender": "Кафе «Лист», бариста",
+      "text": "На C300 снова гул, но напиток готовит. В прошлый раз инженер ничего не нашёл.",
+      "source_ref": "Заявки!D6:E6",
+      "expected_ids": [
+        "EQ04"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [
+          "C300"
+        ],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "noise"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "310",
+          "model": "C300",
+          "client": "Кафе «Лист»",
+          "source_ref": "Оборудование!A7:H7",
+          "id": "EQ04"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-04",
+      "split": "case",
+      "sender": "Кафе «Парк», управляющий",
+      "text": "На машине 211 надпись «Низкий уровень», хотя вода в баке есть. Можно сразу привезти новый насос?",
+      "source_ref": "Заявки!D7:E7",
+      "expected_ids": [
+        "EQ05"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "211"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "211",
+          "model": "C200",
+          "client": "Кафе «Парк»",
+          "source_ref": "Оборудование!A8:H8",
+          "id": "EQ05"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-05",
+      "split": "case",
+      "sender": "Кафе «Угол», администратор",
+      "text": "Наш номер 119. С утра напиток идёт очень медленно, вчера всё работало.",
+      "source_ref": "Заявки!D8:E8",
+      "expected_ids": [
+        "EQ06"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "119"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "flow"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "119",
+          "model": "C100",
+          "client": "Кафе «Угол»",
+          "source_ref": "Оборудование!A9:H9",
+          "id": "EQ06"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-06",
+      "split": "case",
+      "sender": "Кафе «Кедр», бариста",
+      "text": "Уточнение по течи: на шильдике 205, вода появляется справа после приготовления.",
+      "source_ref": "Заявки!D9:E9",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-07",
+      "split": "case",
+      "sender": "Пекарня «Зерно», офис",
+      "text": "В пекарне снова слабый напор, кофе течёт тонкой струйкой.",
+      "source_ref": "Заявки!D10:E10",
+      "expected_ids": [
+        "EQ08",
+        "EQ09"
+      ],
+      "expected_status": "ambiguous",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "flow"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "121",
+          "model": "C100",
+          "client": "Пекарня «Зерно»",
+          "source_ref": "Оборудование!A11:H11",
+          "id": "EQ08"
+        },
+        {
+          "serial": "124",
+          "model": "C100",
+          "client": "Пекарня «Зерно»",
+          "source_ref": "Оборудование!A12:H12",
+          "id": "EQ09"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-08",
+      "split": "case",
+      "sender": "Кафе «Лист», управляющий",
+      "text": "Пришлите инструкцию по разборке, сами починим, чтобы не ждать инженера.",
+      "source_ref": "Заявки!D11:E11",
+      "expected_ids": [
+        "EQ04"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "request"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "310",
+          "model": "C300",
+          "client": "Кафе «Лист»",
+          "source_ref": "Оборудование!A7:H7",
+          "id": "EQ04"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-09",
+      "split": "case",
+      "sender": "Кафе «Ромашка», владелец",
+      "text": "Купили машину с рук. Марку и серийный номер пока не нашли, нужна прокладка.",
+      "source_ref": "Заявки!D12:E12",
+      "expected_ids": [],
+      "expected_status": "unknown",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "unknown"
+      ],
+      "registry_evidence": [],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-10",
+      "split": "case",
+      "sender": "Гостиница «Берег», служба питания",
+      "text": "Фото экрана сделать не можем. Сотрудник на месте прочитает код диспетчеру по телефону после 11:00.",
+      "source_ref": "Заявки!D13:E13",
+      "expected_ids": [
+        "EQ03"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "108",
+          "model": "C100",
+          "client": "Гостиница «Берег»",
+          "source_ref": "Оборудование!A6:H6",
+          "id": "EQ03"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-11",
+      "split": "case",
+      "sender": "Кафе «Маяк», бариста",
+      "text": "Снова капает из-под группы, как перед прошлым ремонтом.",
+      "source_ref": "Заявки!D14:E14",
+      "expected_ids": [
+        "EQ10"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "305",
+          "model": "C300",
+          "client": "Кафе «Маяк»",
+          "source_ref": "Оборудование!A13:H13",
+          "id": "EQ10"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-12",
+      "split": "case",
+      "sender": "Кафе «Кедр», администратор",
+      "text": "Повторяю заявку о течи по серийному 205, ответа пока нет.",
+      "source_ref": "Заявки!D15:E15",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-13",
+      "split": "case",
+      "sender": "Гостиница «Север», завхоз",
+      "text": "Машина 207 работает нормально. Хотим заменить фильтр, как советовал инженер.",
+      "source_ref": "Заявки!D16:E16",
+      "expected_ids": [
+        "EQ11"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "207"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "maintenance"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "207",
+          "model": "C200",
+          "client": "Гостиница «Север»",
+          "source_ref": "Оборудование!A14:H14",
+          "id": "EQ11"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-14",
+      "split": "case",
+      "sender": "Ресторан «Пирс», шеф-бариста",
+      "text": "Машину поставили в начале месяца. Пар из крана идёт слабо, кофе нормальный.",
+      "source_ref": "Заявки!D17:E17",
+      "expected_ids": [
+        "EQ12"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "steam"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "133",
+          "model": "C100",
+          "client": "Ресторан «Пирс»",
+          "source_ref": "Оборудование!A15:H15",
+          "id": "EQ12"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-15",
+      "split": "case",
+      "sender": "Кофейня «Сквер», бариста",
+      "text": "Машина 214 снова гудит при приготовлении, как в августе. Наверное, опять тот узел.",
+      "source_ref": "Заявки!D18:E18",
+      "expected_ids": [
+        "EQ07"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "214"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "noise"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "214",
+          "model": "C200",
+          "client": "Кофейня «Сквер»",
+          "source_ref": "Оборудование!A10:H10",
+          "id": "EQ07"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-16",
+      "split": "case",
+      "sender": "Кафе «Парк», управляющий",
+      "text": "Летом уже меняли датчик уровня. Если это снова он, привезите сразу.",
+      "source_ref": "Заявки!D19:E19",
+      "expected_ids": [
+        "EQ05"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "211",
+          "model": "C200",
+          "client": "Кафе «Парк»",
+          "source_ref": "Оборудование!A8:H8",
+          "id": "EQ05"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-17",
+      "split": "case",
+      "sender": "Пекарня «Зерно», офис",
+      "text": "Уточняю: напор слабый на Садовой. На Ленина всё в порядке.",
+      "source_ref": "Заявки!D20:E20",
+      "expected_ids": [
+        "EQ08"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "flow"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "121",
+          "model": "C100",
+          "client": "Пекарня «Зерно»",
+          "source_ref": "Оборудование!A11:H11",
+          "id": "EQ08"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-18",
+      "split": "case",
+      "sender": "Гостиница «Север», ресепшн",
+      "text": "Вторая машина в баре, номер 270, течёт из-под поддона.",
+      "source_ref": "Заявки!D21:E21",
+      "expected_ids": [],
+      "expected_status": "unknown",
+      "fields": {
+        "models": [],
+        "serials": [
+          "270"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-19",
+      "split": "case",
+      "sender": "Гостиница «Берег», служба питания",
+      "text": "Сотрудник прочитал код на экране: E07.",
+      "source_ref": "Заявки!D22:E22",
+      "expected_ids": [
+        "EQ03"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": [
+          "E07"
+        ]
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "108",
+          "model": "C100",
+          "client": "Гостиница «Берег»",
+          "source_ref": "Оборудование!A6:H6",
+          "id": "EQ03"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-20",
+      "split": "case",
+      "sender": "Кафе «Ромашка», владелец",
+      "text": "Нашли шильдик: C200, номер 230. Договора с вами пока нет.",
+      "source_ref": "Заявки!D23:E23",
+      "expected_ids": [],
+      "expected_status": "unknown",
+      "fields": {
+        "models": [
+          "C200"
+        ],
+        "serials": [
+          "230"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "unknown"
+      ],
+      "registry_evidence": [],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-21",
+      "split": "case",
+      "sender": "Кафе «Маяк», бариста",
+      "text": "На экране ещё появился код E11.",
+      "source_ref": "Заявки!D24:E24",
+      "expected_ids": [
+        "EQ10"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": [
+          "E11"
+        ]
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "305",
+          "model": "C300",
+          "client": "Кафе «Маяк»",
+          "source_ref": "Оборудование!A13:H13",
+          "id": "EQ10"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-22",
+      "split": "case",
+      "sender": "Пекарня «Зерно», офис",
+      "text": "Теперь на Ленина E03, вода в баке есть.",
+      "source_ref": "Заявки!D25:E25",
+      "expected_ids": [
+        "EQ09"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": [
+          "E03"
+        ]
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "124",
+          "model": "C100",
+          "client": "Пекарня «Зерно»",
+          "source_ref": "Оборудование!A12:H12",
+          "id": "EQ09"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "З-23",
+      "split": "case",
+      "sender": "Кафе «Кедр», бариста",
+      "text": "И ещё на 205 слабый пар, молоко не греется.",
+      "source_ref": "Заявки!D26:E26",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "steam"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-01",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "На шильдике 205, вода справа после приготовления.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[0]",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-02",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "Одна из двух машин шумит, номер пока не знаем.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[1]",
+      "expected_ids": [
+        "EQ01",
+        "EQ02"
+      ],
+      "expected_status": "ambiguous",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "noise"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "101",
+          "model": "C100",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A4:H4",
+          "id": "EQ01"
+        },
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-03",
+      "split": "challenge",
+      "sender": "Кафе «Кедрр»",
+      "text": "C200, номер 205, вода справа.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[2]",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [
+          "C200"
+        ],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-04",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "Модель С200, серийный номер 205. Постоянно гудит.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[3]",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [
+          "C200"
+        ],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "noise"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-05",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "Модель C999, течёт снизу.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[4]",
+      "expected_ids": [],
+      "expected_status": "unknown",
+      "fields": {
+        "models": [
+          "C999"
+        ],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-06",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "Номер 205, модель C300, течь.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[5]",
+      "expected_ids": [
+        "EQ02"
+      ],
+      "expected_status": "conflict",
+      "fields": {
+        "models": [
+          "C300"
+        ],
+        "serials": [
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-07",
+      "split": "challenge",
+      "sender": "Гостиница «Север»",
+      "text": "Вторая машина, номер 270, течёт из-под поддона.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[6]",
+      "expected_ids": [],
+      "expected_status": "unknown",
+      "fields": {
+        "models": [],
+        "serials": [
+          "270"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-08",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "Машина 101 и номер 205 обе текут.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[7]",
+      "expected_ids": [
+        "EQ01",
+        "EQ02"
+      ],
+      "expected_status": "conflict",
+      "fields": {
+        "models": [],
+        "serials": [
+          "101",
+          "205"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "leak"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "101",
+          "model": "C100",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A4:H4",
+          "id": "EQ01"
+        },
+        {
+          "serial": "205",
+          "model": "C200",
+          "client": "Кафе «Кедр»",
+          "source_ref": "Оборудование!A5:H5",
+          "id": "EQ02"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-09",
+      "split": "challenge",
+      "sender": "Кафе «Кедр»",
+      "text": "Номер 108, кофе не выдаёт.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[8]",
+      "expected_ids": [
+        "EQ03"
+      ],
+      "expected_status": "conflict",
+      "fields": {
+        "models": [],
+        "serials": [
+          "108"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "108",
+          "model": "C100",
+          "client": "Гостиница «Берег»",
+          "source_ref": "Оборудование!A6:H6",
+          "id": "EQ03"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-10",
+      "split": "challenge",
+      "sender": "Пекарня «Зерно»",
+      "text": "Напор слабый на Садовй. На Ленина всё в порядке.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[9]",
+      "expected_ids": [
+        "EQ08"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "flow"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "121",
+          "model": "C100",
+          "client": "Пекарня «Зерно»",
+          "source_ref": "Оборудование!A11:H11",
+          "id": "EQ08"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-11",
+      "split": "challenge",
+      "sender": "Кафе «Угол»",
+      "text": "C100, s/n 119. С утра кофе идёт медленно, работ не было.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[10]",
+      "expected_ids": [
+        "EQ06"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [
+          "C100"
+        ],
+        "serials": [
+          "119"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "flow"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "119",
+          "model": "C100",
+          "client": "Кафе «Угол»",
+          "source_ref": "Оборудование!A9:H9",
+          "id": "EQ06"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-12",
+      "split": "challenge",
+      "sender": "Кафе «Угол»",
+      "text": "Машина 999, не готовит кофе.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[11]",
+      "expected_ids": [],
+      "expected_status": "unknown",
+      "fields": {
+        "models": [],
+        "serials": [
+          "999"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-13",
+      "split": "challenge",
+      "sender": "Пекарня «Зерно»",
+      "text": "На Ленина ошибка Е03, вода в баке есть.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[12]",
+      "expected_ids": [
+        "EQ09"
+      ],
+      "expected_status": "unique",
+      "fields": {
+        "models": [],
+        "serials": [],
+        "codes": [
+          "E03"
+        ]
+      },
+      "symptoms_provisional": [
+        "error"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "124",
+          "model": "C100",
+          "client": "Пекарня «Зерно»",
+          "source_ref": "Оборудование!A12:H12",
+          "id": "EQ09"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-14",
+      "split": "challenge",
+      "sender": "Кафе «Лист»",
+      "text": "Машина 310 булькает на нагреве.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[13]",
+      "expected_ids": [
+        "EQ04"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [],
+        "serials": [
+          "310"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "noise"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "310",
+          "model": "C300",
+          "client": "Кафе «Лист»",
+          "source_ref": "Оборудование!A7:H7",
+          "id": "EQ04"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "NEW-15",
+      "split": "challenge",
+      "sender": "Кафе «Угол»",
+      "text": "Серийный номер 119, C100. Со вчера кофе почти не льётся.",
+      "source_ref": "scripts/build_reference.py:CHALLENGES[14]",
+      "expected_ids": [
+        "EQ06"
+      ],
+      "expected_status": "exact",
+      "fields": {
+        "models": [
+          "C100"
+        ],
+        "serials": [
+          "119"
+        ],
+        "codes": []
+      },
+      "symptoms_provisional": [
+        "flow"
+      ],
+      "registry_evidence": [
+        {
+          "serial": "119",
+          "model": "C100",
+          "client": "Кафе «Угол»",
+          "source_ref": "Оборудование!A9:H9",
+          "id": "EQ06"
+        }
+      ],
+      "reviewer": null,
+      "reviewed_at": null
+    }
+  ]
+}

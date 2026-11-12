@@ -1,0 +1,134 @@
+{
+  "measured_at": "2026-11-12T13:25:05.505954+00:00",
+  "type": "engineered_policy_scenarios_not_field_business_experiment",
+  "negative_cases": 13,
+  "false_ready": 0,
+  "cases": [
+    {
+      "case": "Две машины клиента, номер неизвестен",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "registry",
+        "identity"
+      ]
+    },
+    {
+      "case": "Машина вне реестра",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "registry",
+        "identity",
+        "identity_conflict"
+      ]
+    },
+    {
+      "case": "Противоречие модели и номера не разрешено",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "identity_conflict",
+        "purpose"
+      ]
+    },
+    {
+      "case": "Симптом не подтверждён",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "symptom"
+      ]
+    },
+    {
+      "case": "Нет времени появления течи",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "questions"
+      ]
+    },
+    {
+      "case": "Вместо кода ошибки записано «не знаю»",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "questions"
+      ]
+    },
+    {
+      "case": "Цель выезда не согласована",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "purpose"
+      ]
+    },
+    {
+      "case": "Нет согласования гарантийного случая",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "approval"
+      ]
+    },
+    {
+      "case": "Свободный остаток равен нулю",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "reservation"
+      ]
+    },
+    {
+      "case": "Перевоз из другого города не согласован",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "transfer"
+      ]
+    },
+    {
+      "case": "Несовместимая деталь отклонена, план ремонта пуст",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "purpose"
+      ]
+    },
+    {
+      "case": "Содержательное изменение после подготовки",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "symptom"
+      ]
+    },
+    {
+      "case": "Новое сообщение после подготовки",
+      "false_ready": false,
+      "http_status": 409,
+      "blockers": [
+        "identity",
+        "symptom",
+        "questions",
+        "duplicates",
+        "purpose"
+      ]
+    }
+  ],
+  "positive_card_sections": {
+    "machine": true,
+    "address": true,
+    "symptom": true,
+    "confirmed_facts": true,
+    "available_history_or_explicit_absence": true,
+    "parts_and_warehouse_or_explicit_diagnostic_without_parts": true,
+    "purpose": true,
+    "uncertainties": true
+  },
+  "complete_sections": 8,
+  "section_denominator": 8,
+  "human_preparation_time": null,
+  "real_repeat_visits_observed": null
+}

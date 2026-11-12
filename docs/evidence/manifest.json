@@ -1,0 +1,51 @@
+{
+  "captured_at": "2026-11-12T13:40:51.309212+00:00",
+  "source_sha256": "152de2da65aa662c6229e7eefc3479432e35f13310e0ded7caa3e4d70aced70b",
+  "files": [
+    {
+      "file": "browser-results.json",
+      "sha256": "812ee315fc14e118a5636c9fbab6de287859cfc29621aef3bf9b941f985c988d",
+      "bytes": 16424
+    },
+    {
+      "file": "workflow-measurement.json",
+      "sha256": "d1d11bee38a123711a35ad2b70358dd583bfe91defe3124013332e28110ea3c4",
+      "bytes": 324
+    },
+    {
+      "file": "engineer-card.pdf",
+      "sha256": "ea2b18161e40dc5a0eb1e1e2571b1ea924002023df95b7807ac5899dada08705",
+      "bytes": 27959
+    },
+    {
+      "file": "prepared-card.png",
+      "sha256": "8c7220b3d7869cbd17af3387e67145d65dbddc2f4d6d32670aa91cd2a4441878",
+      "bytes": 206033
+    },
+    {
+      "file": "queue.png",
+      "sha256": "ee7dee0bede087c8f26ef9ec5cbf96cee9c70ba46fa29c045913c7979a0476b5",
+      "bytes": 470683
+    },
+    {
+      "file": "mobile-detail.png",
+      "sha256": "80a6bdb6a15aedc0944d1d59a44b0f1a9c879169b79717d407a21db1f2aa87c1",
+      "bytes": 207731
+    },
+    {
+      "file": "import-report.png",
+      "sha256": "5459c94661734169296362bec42889dff0702d93ac44feba0835dae5c6c1f454",
+      "bytes": 148947
+    },
+    {
+      "file": "backend-tests.txt",
+      "sha256": "08a01f75d1accf5073d75d340d434ab80745b6c7ebe2c20babf6562d92de8da3",
+      "bytes": 584
+    },
+    {
+      "file": "browser-tests.txt",
+      "sha256": "cc6b616f41d185a19533386ee73bc4289f5dd1cb615e938c0baa8db6369ee606",
+      "bytes": 2033
+    }
+  ]
+}

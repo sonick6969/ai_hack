@@ -1,0 +1,2809 @@
+{
+  "source_sha256": "152de2da65aa662c6229e7eefc3479432e35f13310e0ded7caa3e4d70aced70b",
+  "reference_sha256": "91baeb5196e596d693f547e796f982a84b1e7897d9b8b0127b8beb7452118e2c",
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.39",
+  "examples": 38,
+  "case_examples": 23,
+  "challenge_examples": 15,
+  "verified_literal_values": 33,
+  "expert_reviewed_examples": 0,
+  "llm": {
+    "executed": false,
+    "reason": "No live LLM experiment: optional adapter tested with mocks only."
+  },
+  "results": {
+    "baseline": {
+      "examples": 38,
+      "equipment_set_correct": 29,
+      "decision_correct": 23,
+      "field_values_correct": 23,
+      "field_values_expected": 33,
+      "field_values_predicted": 23,
+      "all_fields_correct": 28,
+      "unique_suggestions": 20,
+      "wrong_unique_suggestions": 2,
+      "provisional_symptoms_correct": 13,
+      "errors": [
+        {
+          "id": "З-02",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.063,
+          "source_ref": "Заявки!D5:E5"
+        },
+        {
+          "id": "З-04",
+          "split": "case",
+          "expected_ids": [
+            "EQ05"
+          ],
+          "predicted_ids": [
+            "EQ05"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "211"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0657,
+          "source_ref": "Заявки!D7:E7"
+        },
+        {
+          "id": "З-05",
+          "split": "case",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0572,
+          "source_ref": "Заявки!D8:E8"
+        },
+        {
+          "id": "З-06",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "205"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0575,
+          "source_ref": "Заявки!D9:E9"
+        },
+        {
+          "id": "З-08",
+          "split": "case",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "request"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0555,
+          "source_ref": "Заявки!D11:E11"
+        },
+        {
+          "id": "З-10",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.065,
+          "source_ref": "Заявки!D13:E13"
+        },
+        {
+          "id": "З-11",
+          "split": "case",
+          "expected_ids": [
+            "EQ10"
+          ],
+          "predicted_ids": [
+            "EQ10"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0497,
+          "source_ref": "Заявки!D14:E14"
+        },
+        {
+          "id": "З-12",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0514,
+          "source_ref": "Заявки!D15:E15"
+        },
+        {
+          "id": "З-13",
+          "split": "case",
+          "expected_ids": [
+            "EQ11"
+          ],
+          "predicted_ids": [
+            "EQ11"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "207"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "maintenance"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0557,
+          "source_ref": "Заявки!D16:E16"
+        },
+        {
+          "id": "З-14",
+          "split": "case",
+          "expected_ids": [
+            "EQ12"
+          ],
+          "predicted_ids": [
+            "EQ12"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "steam"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.058,
+          "source_ref": "Заявки!D17:E17"
+        },
+        {
+          "id": "З-15",
+          "split": "case",
+          "expected_ids": [
+            "EQ07"
+          ],
+          "predicted_ids": [
+            "EQ07"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "214"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0602,
+          "source_ref": "Заявки!D18:E18"
+        },
+        {
+          "id": "З-16",
+          "split": "case",
+          "expected_ids": [
+            "EQ05"
+          ],
+          "predicted_ids": [
+            "EQ05"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0546,
+          "source_ref": "Заявки!D19:E19"
+        },
+        {
+          "id": "З-17",
+          "split": "case",
+          "expected_ids": [
+            "EQ08"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0519,
+          "source_ref": "Заявки!D20:E20"
+        },
+        {
+          "id": "З-22",
+          "split": "case",
+          "expected_ids": [
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.048,
+          "source_ref": "Заявки!D25:E25"
+        },
+        {
+          "id": "З-23",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "205"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "steam"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0501,
+          "source_ref": "Заявки!D26:E26"
+        },
+        {
+          "id": "NEW-01",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "205"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0495,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[0]"
+        },
+        {
+          "id": "NEW-02",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0509,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[1]"
+        },
+        {
+          "id": "NEW-03",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0452,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[2]"
+        },
+        {
+          "id": "NEW-04",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0495,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[3]"
+        },
+        {
+          "id": "NEW-08",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "exact",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "101",
+                "205"
+              ],
+              "predicted": [
+                "205"
+              ]
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.046,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[7]"
+        },
+        {
+          "id": "NEW-09",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0428,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[8]"
+        },
+        {
+          "id": "NEW-10",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ08"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0524,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[9]"
+        },
+        {
+          "id": "NEW-11",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "119"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0572,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[10]"
+        },
+        {
+          "id": "NEW-12",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "unknown",
+          "predicted_status": "unique",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "999"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0429,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[11]"
+        },
+        {
+          "id": "NEW-13",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0496,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[12]"
+        },
+        {
+          "id": "NEW-14",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "310"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0434,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[13]"
+        },
+        {
+          "id": "NEW-15",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0552,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[14]"
+        }
+      ],
+      "rows": [
+        {
+          "id": "З-01",
+          "split": "case",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.066,
+          "source_ref": "Заявки!D4:E4"
+        },
+        {
+          "id": "З-02",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.063,
+          "source_ref": "Заявки!D5:E5"
+        },
+        {
+          "id": "З-03",
+          "split": "case",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "noise"
+          ],
+          "median_latency_ms": 0.0603,
+          "source_ref": "Заявки!D6:E6"
+        },
+        {
+          "id": "З-04",
+          "split": "case",
+          "expected_ids": [
+            "EQ05"
+          ],
+          "predicted_ids": [
+            "EQ05"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "211"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0657,
+          "source_ref": "Заявки!D7:E7"
+        },
+        {
+          "id": "З-05",
+          "split": "case",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0572,
+          "source_ref": "Заявки!D8:E8"
+        },
+        {
+          "id": "З-06",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "205"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0575,
+          "source_ref": "Заявки!D9:E9"
+        },
+        {
+          "id": "З-07",
+          "split": "case",
+          "expected_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "flow"
+          ],
+          "median_latency_ms": 0.0535,
+          "source_ref": "Заявки!D10:E10"
+        },
+        {
+          "id": "З-08",
+          "split": "case",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "request"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0555,
+          "source_ref": "Заявки!D11:E11"
+        },
+        {
+          "id": "З-09",
+          "split": "case",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "unknown"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0606,
+          "source_ref": "Заявки!D12:E12"
+        },
+        {
+          "id": "З-10",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.065,
+          "source_ref": "Заявки!D13:E13"
+        },
+        {
+          "id": "З-11",
+          "split": "case",
+          "expected_ids": [
+            "EQ10"
+          ],
+          "predicted_ids": [
+            "EQ10"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0497,
+          "source_ref": "Заявки!D14:E14"
+        },
+        {
+          "id": "З-12",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0514,
+          "source_ref": "Заявки!D15:E15"
+        },
+        {
+          "id": "З-13",
+          "split": "case",
+          "expected_ids": [
+            "EQ11"
+          ],
+          "predicted_ids": [
+            "EQ11"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "207"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "maintenance"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0557,
+          "source_ref": "Заявки!D16:E16"
+        },
+        {
+          "id": "З-14",
+          "split": "case",
+          "expected_ids": [
+            "EQ12"
+          ],
+          "predicted_ids": [
+            "EQ12"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "steam"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.058,
+          "source_ref": "Заявки!D17:E17"
+        },
+        {
+          "id": "З-15",
+          "split": "case",
+          "expected_ids": [
+            "EQ07"
+          ],
+          "predicted_ids": [
+            "EQ07"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "214"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0602,
+          "source_ref": "Заявки!D18:E18"
+        },
+        {
+          "id": "З-16",
+          "split": "case",
+          "expected_ids": [
+            "EQ05"
+          ],
+          "predicted_ids": [
+            "EQ05"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0546,
+          "source_ref": "Заявки!D19:E19"
+        },
+        {
+          "id": "З-17",
+          "split": "case",
+          "expected_ids": [
+            "EQ08"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0519,
+          "source_ref": "Заявки!D20:E20"
+        },
+        {
+          "id": "З-18",
+          "split": "case",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0507,
+          "source_ref": "Заявки!D21:E21"
+        },
+        {
+          "id": "З-19",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0453,
+          "source_ref": "Заявки!D22:E22"
+        },
+        {
+          "id": "З-20",
+          "split": "case",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "unknown"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0549,
+          "source_ref": "Заявки!D23:E23"
+        },
+        {
+          "id": "З-21",
+          "split": "case",
+          "expected_ids": [
+            "EQ10"
+          ],
+          "predicted_ids": [
+            "EQ10"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0448,
+          "source_ref": "Заявки!D24:E24"
+        },
+        {
+          "id": "З-22",
+          "split": "case",
+          "expected_ids": [
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.048,
+          "source_ref": "Заявки!D25:E25"
+        },
+        {
+          "id": "З-23",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "205"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "steam"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0501,
+          "source_ref": "Заявки!D26:E26"
+        },
+        {
+          "id": "NEW-01",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "205"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0495,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[0]"
+        },
+        {
+          "id": "NEW-02",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0509,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[1]"
+        },
+        {
+          "id": "NEW-03",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0452,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[2]"
+        },
+        {
+          "id": "NEW-04",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0495,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[3]"
+        },
+        {
+          "id": "NEW-05",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0419,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[4]"
+        },
+        {
+          "id": "NEW-06",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0439,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[5]"
+        },
+        {
+          "id": "NEW-07",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0484,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[6]"
+        },
+        {
+          "id": "NEW-08",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "exact",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "101",
+                "205"
+              ],
+              "predicted": [
+                "205"
+              ]
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.046,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[7]"
+        },
+        {
+          "id": "NEW-09",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0428,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[8]"
+        },
+        {
+          "id": "NEW-10",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ08"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0524,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[9]"
+        },
+        {
+          "id": "NEW-11",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "119"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0572,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[10]"
+        },
+        {
+          "id": "NEW-12",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "unknown",
+          "predicted_status": "unique",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "999"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0429,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[11]"
+        },
+        {
+          "id": "NEW-13",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "ambiguous",
+          "equipment_correct": false,
+          "decision_correct": false,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0496,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[12]"
+        },
+        {
+          "id": "NEW-14",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": false,
+          "field_errors": {
+            "serials": {
+              "expected": [
+                "310"
+              ],
+              "predicted": []
+            }
+          },
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0434,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[13]"
+        },
+        {
+          "id": "NEW-15",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0552,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[14]"
+        }
+      ],
+      "latency": {
+        "runs": 380,
+        "median_ms": 0.0525,
+        "p95_ms": 0.066,
+        "max_ms": 0.7811
+      }
+    },
+    "selected_local": {
+      "examples": 38,
+      "equipment_set_correct": 38,
+      "decision_correct": 38,
+      "field_values_correct": 33,
+      "field_values_expected": 33,
+      "field_values_predicted": 33,
+      "all_fields_correct": 38,
+      "unique_suggestions": 26,
+      "wrong_unique_suggestions": 0,
+      "provisional_symptoms_correct": 32,
+      "errors": [
+        {
+          "id": "NEW-01",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0775,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[0]"
+        },
+        {
+          "id": "NEW-03",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.1439,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[2]"
+        },
+        {
+          "id": "NEW-08",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0605,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[7]"
+        },
+        {
+          "id": "NEW-09",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0544,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[8]"
+        },
+        {
+          "id": "NEW-14",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0627,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[13]"
+        },
+        {
+          "id": "NEW-15",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.085,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[14]"
+        }
+      ],
+      "rows": [
+        {
+          "id": "З-01",
+          "split": "case",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.1104,
+          "source_ref": "Заявки!D4:E4"
+        },
+        {
+          "id": "З-02",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0965,
+          "source_ref": "Заявки!D5:E5"
+        },
+        {
+          "id": "З-03",
+          "split": "case",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "noise"
+          ],
+          "median_latency_ms": 0.098,
+          "source_ref": "Заявки!D6:E6"
+        },
+        {
+          "id": "З-04",
+          "split": "case",
+          "expected_ids": [
+            "EQ05"
+          ],
+          "predicted_ids": [
+            "EQ05"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.1099,
+          "source_ref": "Заявки!D7:E7"
+        },
+        {
+          "id": "З-05",
+          "split": "case",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "flow"
+          ],
+          "median_latency_ms": 0.0901,
+          "source_ref": "Заявки!D8:E8"
+        },
+        {
+          "id": "З-06",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.094,
+          "source_ref": "Заявки!D9:E9"
+        },
+        {
+          "id": "З-07",
+          "split": "case",
+          "expected_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ08",
+            "EQ09"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "flow"
+          ],
+          "median_latency_ms": 0.0831,
+          "source_ref": "Заявки!D10:E10"
+        },
+        {
+          "id": "З-08",
+          "split": "case",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "request"
+          ],
+          "predicted_symptoms": [
+            "request"
+          ],
+          "median_latency_ms": 0.0884,
+          "source_ref": "Заявки!D11:E11"
+        },
+        {
+          "id": "З-09",
+          "split": "case",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "unknown"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.1672,
+          "source_ref": "Заявки!D12:E12"
+        },
+        {
+          "id": "З-10",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.1111,
+          "source_ref": "Заявки!D13:E13"
+        },
+        {
+          "id": "З-11",
+          "split": "case",
+          "expected_ids": [
+            "EQ10"
+          ],
+          "predicted_ids": [
+            "EQ10"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0762,
+          "source_ref": "Заявки!D14:E14"
+        },
+        {
+          "id": "З-12",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.081,
+          "source_ref": "Заявки!D15:E15"
+        },
+        {
+          "id": "З-13",
+          "split": "case",
+          "expected_ids": [
+            "EQ11"
+          ],
+          "predicted_ids": [
+            "EQ11"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "maintenance"
+          ],
+          "predicted_symptoms": [
+            "maintenance"
+          ],
+          "median_latency_ms": 0.0918,
+          "source_ref": "Заявки!D16:E16"
+        },
+        {
+          "id": "З-14",
+          "split": "case",
+          "expected_ids": [
+            "EQ12"
+          ],
+          "predicted_ids": [
+            "EQ12"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "steam"
+          ],
+          "predicted_symptoms": [
+            "steam"
+          ],
+          "median_latency_ms": 0.0953,
+          "source_ref": "Заявки!D17:E17"
+        },
+        {
+          "id": "З-15",
+          "split": "case",
+          "expected_ids": [
+            "EQ07"
+          ],
+          "predicted_ids": [
+            "EQ07"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "noise"
+          ],
+          "median_latency_ms": 0.0975,
+          "source_ref": "Заявки!D18:E18"
+        },
+        {
+          "id": "З-16",
+          "split": "case",
+          "expected_ids": [
+            "EQ05"
+          ],
+          "predicted_ids": [
+            "EQ05"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0871,
+          "source_ref": "Заявки!D19:E19"
+        },
+        {
+          "id": "З-17",
+          "split": "case",
+          "expected_ids": [
+            "EQ08"
+          ],
+          "predicted_ids": [
+            "EQ08"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "flow"
+          ],
+          "median_latency_ms": 0.0838,
+          "source_ref": "Заявки!D20:E20"
+        },
+        {
+          "id": "З-18",
+          "split": "case",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0734,
+          "source_ref": "Заявки!D21:E21"
+        },
+        {
+          "id": "З-19",
+          "split": "case",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0661,
+          "source_ref": "Заявки!D22:E22"
+        },
+        {
+          "id": "З-20",
+          "split": "case",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "unknown"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.1525,
+          "source_ref": "Заявки!D23:E23"
+        },
+        {
+          "id": "З-21",
+          "split": "case",
+          "expected_ids": [
+            "EQ10"
+          ],
+          "predicted_ids": [
+            "EQ10"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0651,
+          "source_ref": "Заявки!D24:E24"
+        },
+        {
+          "id": "З-22",
+          "split": "case",
+          "expected_ids": [
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0745,
+          "source_ref": "Заявки!D25:E25"
+        },
+        {
+          "id": "З-23",
+          "split": "case",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "steam"
+          ],
+          "predicted_symptoms": [
+            "steam"
+          ],
+          "median_latency_ms": 0.0784,
+          "source_ref": "Заявки!D26:E26"
+        },
+        {
+          "id": "NEW-01",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0775,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[0]"
+        },
+        {
+          "id": "NEW-02",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "ambiguous",
+          "predicted_status": "ambiguous",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "noise"
+          ],
+          "median_latency_ms": 0.0787,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[1]"
+        },
+        {
+          "id": "NEW-03",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.1439,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[2]"
+        },
+        {
+          "id": "NEW-04",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "noise"
+          ],
+          "median_latency_ms": 0.0775,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[3]"
+        },
+        {
+          "id": "NEW-05",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0518,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[4]"
+        },
+        {
+          "id": "NEW-06",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ02"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0568,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[5]"
+        },
+        {
+          "id": "NEW-07",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "leak"
+          ],
+          "median_latency_ms": 0.0686,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[6]"
+        },
+        {
+          "id": "NEW-08",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "predicted_ids": [
+            "EQ01",
+            "EQ02"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "leak"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0605,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[7]"
+        },
+        {
+          "id": "NEW-09",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ03"
+          ],
+          "predicted_ids": [
+            "EQ03"
+          ],
+          "expected_status": "conflict",
+          "predicted_status": "conflict",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0544,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[8]"
+        },
+        {
+          "id": "NEW-10",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ08"
+          ],
+          "predicted_ids": [
+            "EQ08"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "flow"
+          ],
+          "median_latency_ms": 0.0805,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[9]"
+        },
+        {
+          "id": "NEW-11",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "flow"
+          ],
+          "median_latency_ms": 0.0861,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[10]"
+        },
+        {
+          "id": "NEW-12",
+          "split": "challenge",
+          "expected_ids": [],
+          "predicted_ids": [],
+          "expected_status": "unknown",
+          "predicted_status": "unknown",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0553,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[11]"
+        },
+        {
+          "id": "NEW-13",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ09"
+          ],
+          "predicted_ids": [
+            "EQ09"
+          ],
+          "expected_status": "unique",
+          "predicted_status": "unique",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": true,
+          "expected_symptoms_provisional": [
+            "error"
+          ],
+          "predicted_symptoms": [
+            "error"
+          ],
+          "median_latency_ms": 0.0731,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[12]"
+        },
+        {
+          "id": "NEW-14",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ04"
+          ],
+          "predicted_ids": [
+            "EQ04"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "noise"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.0627,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[13]"
+        },
+        {
+          "id": "NEW-15",
+          "split": "challenge",
+          "expected_ids": [
+            "EQ06"
+          ],
+          "predicted_ids": [
+            "EQ06"
+          ],
+          "expected_status": "exact",
+          "predicted_status": "exact",
+          "equipment_correct": true,
+          "decision_correct": true,
+          "field_errors": {},
+          "symptoms_provisional_correct": false,
+          "expected_symptoms_provisional": [
+            "flow"
+          ],
+          "predicted_symptoms": [
+            "unknown"
+          ],
+          "median_latency_ms": 0.085,
+          "source_ref": "scripts/build_reference.py:CHALLENGES[14]"
+        }
+      ],
+      "latency": {
+        "runs": 380,
+        "median_ms": 0.0833,
+        "p95_ms": 0.1511,
+        "max_ms": 1.5097
+      }
+    }
+  }
+}
