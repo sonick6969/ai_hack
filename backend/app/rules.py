@@ -2,6 +2,7 @@ import re
 from datetime import date, timedelta
 
 from .extraction import local_extract, norm
+from .answers import answer_record
 
 ERROR_CODES = {'E03': 'Нет подачи воды в машину', 'E07': 'Заварочный блок не обнаружен', 'E11': 'Датчик показывает низкий уровень воды'}
 QUESTIONS = {
@@ -29,19 +30,22 @@ def questions_for(analysis, data):
         keys += {'leak': ['leak_location', 'leak_timing'], 'flow': ['onset', 'after_work'],
                  'error': ['error_code'], 'noise': ['noise_context'], 'steam': ['steam_context'],
                  'unknown': ['general_context'], 'request': ['general_context']}.get(symptom, [])
-    answers = data.get('answers', {})
-    unknowns = {'не знаю', 'неизвестно', 'не помню', 'нет данных', 'уточнить', 'пока неизвестно', 'неизвестен'}
+    if analysis.get('uncertainties'):
+        keys.append('general_context')
 
     def resolved(key):
-        answer = answers.get(key, '').strip()
-        if len(answer) < 3 or norm(answer).strip('.!?') in unknowns:
+        record = answer_record(data, key)
+        answer = record['text'].strip()
+        if record['status'] != 'answered':
             return False
         if key == 'error_code':
             return bool(re.fullmatch(r'[EЕeе]\s*\d{2}', answer))
         return True
 
     return [{'key': key, 'question': QUESTIONS[key][0], 'hint': QUESTIONS[key][1],
-             'suggested': analysis['facts'].get(key, ''), 'answer': answers.get(key, ''),
+             'suggested': analysis['facts'].get(key, ''), 'answer': answer_record(data, key)['text'],
+             'status': answer_record(data, key)['status'], 'provenance': answer_record(data, key),
+             'basis': 'case' if key in {'leak_location','leak_timing','onset','after_work','error_code'} else 'product',
              'resolved': resolved(key)}
             for key in dict.fromkeys(keys)]
 

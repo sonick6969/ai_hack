@@ -93,6 +93,12 @@ def get_ticket(ticket_id: int, conn=Depends(db)):
     return repository.detail(conn, ticket_id)
 
 
+@app.get('/api/tickets/{ticket_id}/answers')
+def answer_history(ticket_id: int, conn=Depends(db)):
+    require_ticket(conn, ticket_id)
+    return [dict(row) for row in conn.execute('SELECT * FROM answer_events WHERE ticket_id=? ORDER BY id', (ticket_id,))]
+
+
 @app.post('/api/messages', status_code=201)
 def new_message(body: NewMessage, conn=Depends(db), who=Depends(actor)):
     analysis = extract(body.text, body.sender)  # Network is outside the write transaction.
@@ -119,7 +125,9 @@ def append_message(ticket_id: int, body: NewMessage, revision: int = Query(ge=1)
         old_analysis = repository.effective_analysis(old_messages, json.loads(old_ticket['data']))
         existing_issues = set(old_analysis['symptoms']) - {'unknown', 'request'}
         new_issues = set(analysis['symptoms']) - {'unknown', 'request'}
-        if existing_issues and new_issues and not existing_issues & new_issues:
+        retracted = set(analysis.get('negated_symptoms', [])) | set(analysis.get('past_symptoms', []))
+        is_correction = bool(existing_issues & retracted)
+        if existing_issues and new_issues and not existing_issues & new_issues and not is_correction:
             raise DomainError('different_problem', 'Новая проблема требует отдельной заявки. Создайте новое обращение из очереди.')
         if old_ticket['equipment_id'] and analysis['serials']:
             selected_eq = conn.execute('SELECT serial FROM equipment WHERE id=?', (old_ticket['equipment_id'],)).fetchone()
@@ -131,12 +139,16 @@ def append_message(ticket_id: int, body: NewMessage, revision: int = Query(ge=1)
             if prior['ticket_id'] != ticket_id or prior['text'] != body.text or prior['sender'] != body.sender:
                 raise DomainError('idempotency_conflict', 'Ключ запроса уже использован для другого сообщения.')
         else:
+            # A recorded clarification follows the evidence already seen by the dispatcher,
+            # even when the case workbook is dated in the future or a source clock is wrong.
+            analysis['supersedes_message_ids'] = [m['id'] for m in old_messages]
             conn.execute('''INSERT INTO messages(external_key,ticket_id,sender,channel,text,received_at,analysis,source_ref,source,created_at)
                          VALUES(?,?,?,?,?,?,?,?,?,?)''', (key, ticket_id, body.sender, body.channel, body.text, stamp, encode(analysis), 'Уточнение диспетчера', 'manual', now()))
             old = require_ticket(conn, ticket_id)
             data = json.loads(old['data'])
             data.update(symptom_confirmed=False, plan_confirmed=False, equipment_confirmed=False, address_confirmed=False)
             data['answers'] = {}
+            data['answer_records'] = {}
             data.pop('issue_types', None)
             data.pop('identity_resolution', None)
             data.pop('duplicate_resolution', None)

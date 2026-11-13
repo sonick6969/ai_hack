@@ -39,3 +39,9 @@ def test_validation_unknown_field_and_negative_quantity(loaded):
     result = loaded.post(f'/api/tickets/{ticket["id"]}/parts', json={'revision': ticket['revision'], 'sku': 'F010', 'warehouse': 'Москва', 'quantity': -1})
     assert result.status_code == 422
     assert 'error' in result.json()
+
+
+def test_confirmation_validation_does_not_change_optional_measurement_notes():
+    from backend.app.measurement_schemas import MeasurementTransition
+    transition = MeasurementTransition(client_id='client-test-01',revision=1,state='working',note='')
+    assert transition.note == ''

@@ -1,0 +1,13 @@
+
+> coffee-service-dispatch@1.0.0 build
+> tsc -b && vite build
+
+vite v6.4.6 building for production...
+transforming...
+✓ 1585 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.76 kB │ gzip:  0.48 kB
+dist/assets/index-BLy6Xvun.css   78.92 kB │ gzip: 17.29 kB
+dist/assets/index-BC5IsI5Q.js   320.74 kB │ gzip: 95.71 kB
+✓ built in 2.06s

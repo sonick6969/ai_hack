@@ -2,6 +2,7 @@ import io
 
 from openpyxl import load_workbook
 
+from backend.app import config
 from backend.app.config import CASE_FILE
 from backend.app.db import connect, migrate
 
@@ -73,5 +74,5 @@ def test_migrations_are_repeatable_and_transactional(tmp_path):
     path = tmp_path / 'migration.sqlite3'
     migrate(path); migrate(path)
     with connect(path) as conn:
-        assert conn.execute('SELECT COUNT(*) FROM schema_migrations').fetchone()[0] == 1
+        assert conn.execute('SELECT COUNT(*) FROM schema_migrations').fetchone()[0] == len(list(config.ROOT.joinpath('backend/migrations').glob('*.sql')))
         assert conn.execute('PRAGMA foreign_keys').fetchone()[0] == 1

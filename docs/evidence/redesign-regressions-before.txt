@@ -1,0 +1,61 @@
+Исходный запуск до исправления реализации. Полный контрольный набор затем расширен.
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[correction]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[two-negations]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[colloquial-drip]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[contrast]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[reverse-contrast]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[negation-chain]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[neither]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[past]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[past-and-current]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[stopped]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[hypothesis]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[local-guess]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[multiple-machines]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[multiple-sentences]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[short-subject]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[coffee-drips]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[not-no-coffee]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[no-noise]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[no-leak]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[punctuation]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[contradiction]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[uncertain-client]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[incomplete]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[part-only]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[whistle]
+FAILED backend/tests/test_language_regressions.py::test_language_corpus[no-more-error]
+FAILED backend/tests/test_language_regressions.py::test_correction_replaces_old_symptom_and_keeps_evidence
+FAILED backend/tests/test_language_regressions.py::test_correction_can_be_appended_to_existing_problem
+FAILED backend/tests/test_language_regressions.py::test_later_denial_applies_only_to_its_machine
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u043f\u043e\u043a\u0430 \u043d\u0435 \u0437\u043d\u0430\u044e]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u043d\u0435 \u043c\u043e\u0433\u0443 \u0441\u043a\u0430\u0437\u0430\u0442\u044c]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[  \u041f\u041e\u041a\u0410   \u041d\u0415 \u0417\u041d\u0410\u042e!!! ]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u041d\u0435 \u043c\u043e\u0433\u0443 \u0441\u043a\u0430\u0437\u0430\u0442\u044c\u2026]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u043d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u0430]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[???]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u041d\u0435 \u043c\u043e\u0433\u0443 \u043e\u0442\u0432\u0435\u0442\u0438\u0442\u044c]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u0437\u0430\u0442\u0440\u0443\u0434\u043d\u044f\u044e\u0441\u044c \u043e\u0442\u0432\u0435\u0442\u0438\u0442\u044c]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u0443\u0442\u043e\u0447\u043d\u044e]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u0435\u0449\u0451 \u043d\u0435 \u0432\u044b\u044f\u0441\u043d\u0438\u043b\u0438]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u041f\u043e\u043a\u0430 \u043d\u0435 \u0437\u043d\u0430\u044e, \u043d\u0435 \u043c\u043e\u0433\u0443 \u0441\u043a\u0430\u0437\u0430\u0442\u044c.]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u043d\u0435 \u0432 \u043a\u0443\u0440\u0441\u0435]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u043d\u0435\u0442 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438]
+FAILED backend/tests/test_answer_states.py::test_unknown_answer_does_not_resolve_question[\u043d\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u043e]
+FAILED backend/tests/test_answer_states.py::test_explicit_unknown_is_persisted_with_text_origin_and_history
+FAILED backend/tests/test_answer_states.py::test_backend_cannot_be_bypassed_with_answered_unknown
+FAILED backend/tests/test_answer_states.py::test_message_provenance_cannot_reference_another_ticket
+FAILED backend/tests/test_answer_states.py::test_unknown_general_answer_does_not_satisfy_safe_actions
+FAILED backend/tests/test_readiness_rules.py::test_official_rules_allow_work_without_replacement_parts[repair]
+FAILED backend/tests/test_readiness_rules.py::test_official_rules_allow_work_without_replacement_parts[maintenance]
+FAILED backend/tests/test_readiness_rules.py::test_failed_checks_have_reason_and_action_separate_from_label
+FAILED backend/tests/test_readiness_rules.py::test_ambiguous_symptom_requires_substantive_clarification
+51 failed, 18 passed, 1 warning in 1.46s
+
+Дополнительные проверки обоснований до исправления:
+FAILED backend/tests/test_unknown_justifications.py::test_unknown_text_cannot_confirm_symptom_or_plan[symptom]
+FAILED backend/tests/test_unknown_justifications.py::test_unknown_text_cannot_confirm_symptom_or_plan[purpose_note]
+FAILED backend/tests/test_unknown_justifications.py::test_unknown_identity_explanation_does_not_resolve_registry_conflict
+FAILED backend/tests/test_unknown_justifications.py::test_unknown_note_does_not_record_approval_or_manager_route[approval-extra0]
+FAILED backend/tests/test_unknown_justifications.py::test_unknown_note_does_not_record_approval_or_manager_route[manager-extra1]
+5 failed, 1 warning in 0.90s

@@ -22,7 +22,8 @@ import {
 } from "lucide-react";
 import { api, dateTime, post, sourceLabel } from "./api";
 import type { Summary, Ticket, TicketRow } from "./types";
-import { Empty, Modal, Notice, Spinner, Status, errorText } from "./ui";
+import { Empty, Modal, Notice, QueueArtwork, Spinner, Status, errorText } from "./ui";
+import { clearDrafts, hasDrafts, useDirtyDrafts, useDraftState } from "./drafts";
 import { ImportPage, JournalPage, RulesPage, StockPage } from "./pages";
 import TicketPage from "./TicketPage";
 
@@ -36,7 +37,10 @@ const navigation = [
 ];
 
 export default function App() {
-  const [screen, setScreen] = useState<Screen>("queue");
+  const [screen, setScreen] = useState<Screen>(() => {
+    const section = new URLSearchParams(location.search).get("section");
+    return navigation.some(n => n.id === section) ? section as Screen : "queue";
+  });
   const [selected, setSelected] = useState<number | null>(
     () => Number(new URLSearchParams(location.search).get("ticket")) || null,
   );
@@ -50,14 +54,15 @@ export default function App() {
   const [version, setVersion] = useState(0);
   const [showNew, setShowNew] = useState(false);
   const [toast, setToast] = useState("");
+  const [pendingNavigation, setPendingNavigation] = useState<(() => void) | null>(null);
+  useDirtyDrafts();
+  const newDraft = useDirtyDrafts(0);
   const notify = useCallback((message: string) => setToast(message), []);
   const reload = useCallback(() => setVersion((v) => v + 1), []);
   const navigate = useCallback((target: Screen, id: number | null = null) => {
-    setScreen(target);
-    setSelected(id);
-    history.pushState(null, "", id ? `?ticket=${id}` : "/");
-    window.scrollTo({ top: 0 });
-  }, []);
+    const action = () => {setScreen(target); setSelected(id); history.pushState(null, "", id ? `?ticket=${id}` : target === "queue" ? "/" : `?section=${target}`); window.scrollTo({ top: 0 });};
+    if (hasDrafts(selected ?? 0)) setPendingNavigation(() => action); else action();
+  }, [selected]);
   useEffect(() => {
     Promise.all([
       api<Summary>("/summary"),
@@ -80,7 +85,8 @@ export default function App() {
   }, [toast]);
   useEffect(() => {
     const pop = () => {
-      setScreen("queue");
+      const section = new URLSearchParams(location.search).get("section");
+      setScreen(navigation.some(n => n.id === section) ? section as Screen : "queue");
       setSelected(
         Number(new URLSearchParams(location.search).get("ticket")) || null,
       );
@@ -153,12 +159,13 @@ export default function App() {
             <span className="topbar-separator" />
             <span className="engine-label">
               {health?.llm_enabled
-                ? "Локальный разбор + LLM"
+                ? health.llm_configured ? "LLM настроена · результат в обращении" : "LLM не настроена · локальный разбор"
                 : "Локальный разбор"}
             </span>
           </div>
         </header>
         <main className={`main-content ${selected ? "detail-content" : ""}`}>
+          {newDraft && !showNew && <div className="draft-banner" role="status"><FileInput size={16} />Есть несохранённый черновик нового обращения.<button className="text-button" onClick={() => setShowNew(true)}>Продолжить ввод</button></div>}
           {loadError && (
             <div className="global-error">
               <Notice kind="error">
@@ -180,12 +187,13 @@ export default function App() {
               />
             ) : (
               <>
-                <div className="page-heading">
+                <div className="page-heading queue-hero">
                   <div>
-                    <div className="eyebrow">ДИСПЕТЧЕРСКАЯ</div>
+                    <div className="eyebrow">ДИСПЕТЧЕРСКАЯ <span className="region-label">МОСКВА + ТУЛА</span></div>
                     <h1>Подготовка выездов</h1>
-                    <p>От сообщения клиента до понятного задания инженеру.</p>
+                    <p>Всё, что нужно инженеру. До первого выезда.</p>
                   </div>
+                  <QueueArtwork />
                   <button
                     className="button primary"
                     onClick={() => setShowNew(true)}
@@ -211,11 +219,11 @@ export default function App() {
                       sub: "Есть препятствия к выезду",
                     },
                     {
-                      label: "Готово к выезду",
+                      label: "Карточки готовы",
                       value: summary?.ready,
                       icon: CheckCircle2,
                       color: "green",
-                      sub: "Все проверки пройдены",
+                      sub: "Подготовлены к передаче",
                     },
                     {
                       label: "На согласование",
@@ -232,7 +240,7 @@ export default function App() {
                           <s.icon size={18} />
                         </span>
                       </div>
-                      <strong className="stat-value">{s.value ?? "—"}</strong>
+                      <strong className={`stat-value ${String(s.value ?? "").length > 5 ? "long-value" : ""}`}>{s.value ?? "—"}</strong>
                       <small>{s.sub}</small>
                     </div>
                   ))}
@@ -276,6 +284,7 @@ export default function App() {
             />
           )}
         </main>
+        <footer className="app-footer"><span>КОФЕСЕРВИС РЕГИОН · ДИСПЕТЧЕРСКАЯ</span><a href="/assets/ATTRIBUTION.html" target="_blank" rel="noreferrer">Материалы и лицензии</a></footer>
       </div>
       {showNew && (
         <Modal title="Новое обращение" close={() => setShowNew(false)}>
@@ -302,6 +311,7 @@ export default function App() {
           </button>
         </div>
       )}
+      {pendingNavigation && <Modal title="Есть несохранённые изменения" close={() => setPendingNavigation(null)}><p>Изменения ещё не записаны в заявку. Черновик останется в этой вкладке: вы сможете вернуться и сохранить его.</p><div className="form-actions"><button className="button secondary" onClick={() => setPendingNavigation(null)}>Остаться</button><button className="button primary" onClick={() => {pendingNavigation(); setPendingNavigation(null);}}>Перейти, сохранив черновик</button></div></Modal>}
     </div>
   );
 }
@@ -391,7 +401,7 @@ function Queue({
           <option value="">Все статусы</option>
           <option value="blocked">Нужна подготовка</option>
           <option value="review">Можно подготовить</option>
-          <option value="ready">Готово к выезду</option>
+          <option value="ready">Карточка готова к передаче</option>
           <option value="manager">Менеджеру</option>
         </select>
         <select
@@ -469,7 +479,7 @@ function Queue({
                 <th>ОБРАЩЕНИЕ / КЛИЕНТ</th>
                 <th>ОБОРУДОВАНИЕ</th>
                 <th>СИМПТОМ</th>
-                <th>ПОДГОТОВКА</th>
+                <th>СЛЕДУЮЩЕЕ ДЕЙСТВИЕ</th>
                 <th>ВРЕМЯ</th>
                 <th />
               </tr>
@@ -540,7 +550,7 @@ function Queue({
                         ? "Карточка инженера подготовлена"
                         : t.status === "manager"
                           ? "Зафиксирован маршрут менеджеру"
-                          : (t.blockers[0]?.label ?? "Все условия выполнены")}
+                          : (t.blockers[0]?.next_action ?? "Подготовить карточку инженера")}
                     </div>
                     {t.warranty && (
                       <span className="micro-tag">Согласование</span>
@@ -583,10 +593,11 @@ export function NewMessageForm({
   onCreated: (ticket: Ticket) => void;
   ticket?: Ticket;
 }) {
-  const [sender, setSender] = useState(ticket?.messages[0].sender ?? "");
-  const [text, setText] = useState(""),
-    [channel, setChannel] = useState("Ручной ввод"),
-    [at, setAt] = useState("");
+  const draftId = ticket?.id ?? 0;
+  const [sender, setSender] = useDraftState(draftId, "new-message", "sender", ticket?.messages[0].sender ?? "");
+  const [text, setText] = useDraftState(draftId, "new-message", "text", ""),
+    [channel, setChannel] = useDraftState(draftId, "new-message", "channel", "Ручной ввод"),
+    [at, setAt] = useDraftState(draftId, "new-message", "at", "");
   const [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
   const requestId = useRef(crypto.randomUUID());
@@ -602,16 +613,16 @@ export function NewMessageForm({
       ...(at ? { received_at: new Date(at).toISOString() } : {}),
     };
     try {
-      if (ticket)
-        onCreated(
-          await post<Ticket>(
+      if (ticket) {
+        const result = await post<Ticket>(
             `/tickets/${ticket.id}/messages?revision=${ticket.revision}`,
             body,
-          ),
-        );
+          );
+        clearDrafts(draftId, "new-message"); onCreated(result);
+      }
       else {
         const result = await post<{ ticket: Ticket }>("/messages", body);
-        onCreated(result.ticket);
+        clearDrafts(draftId, "new-message"); onCreated(result.ticket);
       }
     } catch (e) {
       setError(errorText(e));

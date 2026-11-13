@@ -26,7 +26,7 @@ def test_confirmed_diagnostic_and_print_card(loaded):
     assert card['history']['source_ref'] == 'Оборудование!A5:H5'
     assert any('не гарантирует' in x for x in card['uncertainties'])
     printed = loaded.get(f'/api/tickets/{ticket["id"]}/print')
-    assert printed.status_code == 200 and 'ГОТОВО К ВЫЕЗДУ' in printed.text
+    assert printed.status_code == 200 and 'КАРТОЧКА ГОТОВА К ПЕРЕДАЧЕ' in printed.text
     for label in ('Подтверждённые сведения', 'Доступная история', 'Детали и склад получения', 'Цель визита', 'Оставшиеся неопределённости'):
         assert label in printed.text
 

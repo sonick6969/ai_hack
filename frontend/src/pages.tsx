@@ -341,7 +341,7 @@ export function StockPage({ version }: { version: number }) {
         </span>
       </div>
       <Notice>
-        Свободно = на складе − исходный резерв − резервы пилота. Перевоз между
+        Доступно = на складе − резерв других выездов − резерв заявок. Перевоз между
         Москвой и Тулой занимает один рабочий день.
       </Notice>
       <section className="panel">
@@ -396,9 +396,8 @@ export function StockPage({ version }: { version: number }) {
                   <th>МОДЕЛИ</th>
                   <th>СКЛАД</th>
                   <th>НА СКЛАДЕ</th>
-                  <th>ИСХОДНЫЙ РЕЗЕРВ</th>
-                  <th>РЕЗЕРВ ПИЛОТА</th>
-                  <th>СВОБОДНО</th>
+                  <th>В РЕЗЕРВЕ</th>
+                  <th>ДОСТУПНО</th>
                 </tr>
               </thead>
               <tbody>
@@ -412,8 +411,7 @@ export function StockPage({ version }: { version: number }) {
                     <td>{r.models.join(", ")}</td>
                     <td>{r.warehouse}</td>
                     <td>{r.on_hand}</td>
-                    <td>{r.external_reserved}</td>
-                    <td>{r.pilot_reserved}</td>
+                    <td><strong>{r.external_reserved + r.pilot_reserved}</strong><div className="row-meta">Другие выезды: {r.external_reserved}<br />Заявки: {r.pilot_reserved}</div></td>
                     <td>
                       <span
                         className={`stock-number ${r.free ? "available" : "unavailable"}`}
