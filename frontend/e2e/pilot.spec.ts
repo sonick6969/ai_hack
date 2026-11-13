@@ -97,7 +97,7 @@ test("Незнакомый текст: машина, ответы, реальн�
     page.getByRole("heading", { name: "Кафе «Угол»", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Подготовить выезд", exact: true }),
+    page.getByRole("button", { name: "Подготовить карточку", exact: true }),
   ).toBeDisabled();
   const id = Number(new URL(page.url()).searchParams.get("ticket"));
   await page
@@ -140,7 +140,7 @@ test("Незнакомый текст: машина, ответы, реальн�
   await page
     .getByRole("button", { name: "Сохранить ответы и симптом", exact: true })
     .click();
-  await page.getByRole("tab", { name: "Выезд и детали" }).click();
+  await page.getByRole("tab", { name: "Детали" }).click();
   await page
     .getByLabel("Что должен сделать инженер?", { exact: true })
     .fill(
@@ -159,7 +159,7 @@ test("Незнакомый текст: машина, ответы, реальн�
     .getByRole("button", { name: "Сохранить план выезда", exact: true })
     .click();
   await expect(
-    page.getByRole("button", { name: "Подготовить выезд", exact: true }),
+    page.getByRole("button", { name: "Подготовить карточку", exact: true }),
   ).toBeEnabled();
   await page.getByLabel("Деталь", { exact: true }).selectOption("F010");
   await page
@@ -172,7 +172,7 @@ test("Незнакомый текст: машина, ответы, реальн�
     page.getByText("Не зарезервировано", { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Подготовить выезд", exact: true }),
+    page.getByRole("button", { name: "Подготовить карточку", exact: true }),
   ).toBeDisabled();
   await page
     .getByRole("button", { name: "Подтвердить резерв", exact: true })
@@ -182,12 +182,12 @@ test("Незнакомый текст: машина, ответы, реальн�
     .getByRole("button", { name: "Подтвердить резерв", exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Подготовить выезд", exact: true })
+    .getByRole("button", { name: "Подготовить карточку", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Можно выезжать", exact: true }),
+    page.getByRole("heading", { name: "Карточка готова к передаче", exact: true }),
   ).toBeVisible();
-  await page.getByRole("tab", { name: "Карточка инженера" }).click();
+  await page.getByRole("tab", { name: "Карточка" }).click();
   await expect(
     page.getByRole("heading", {
       name: "Задание сервисному инженеру",
@@ -212,8 +212,10 @@ test("Незнакомый текст: машина, ответы, реальн�
   await page.getByRole("link", { name: "Печать / PDF", exact: true }).click();
   const popup = await popupPromise;
   await popup.waitForLoadState();
-  await expect(popup.locator("body")).toContainText("ГОТОВО К ВЫЕЗДУ");
+  await expect(popup.locator("body")).toContainText("КАРТОЧКА ГОТОВА К ПЕРЕДАЧЕ");
   await popup.emulateMedia({ media: "print" });
+  fs.mkdirSync(path.join(screenshots,"redesign"),{recursive:true});
+  await popup.screenshot({path:path.join(screenshots,"redesign","print-card.png"),fullPage:true});
   await popup.pdf({
     path: path.join(screenshots, "engineer-card.pdf"),
     format: "A4",
@@ -233,7 +235,7 @@ test("Незнакомый текст: машина, ответы, реальн�
     .getByRole("button", { name: "Сохранить уточнение", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Подготовим без пробелов", exact: true }),
+    page.getByRole("heading", { name: "Что сделать дальше", exact: true }),
   ).toBeVisible();
   const state = await (await page.request.get(`/api/tickets/${id}`)).json();
   expect(state.readiness.ready).toBe(false);
@@ -268,7 +270,7 @@ test("Нулевой остаток: настоящий отказ резерв�
     "Кафе «Кедр», проверка склада",
     "На машине 205 вода появляется справа после приготовления. Проверка нулевого остатка.",
   );
-  await page.getByRole("tab", { name: "Выезд и детали" }).click();
+  await page.getByRole("tab", { name: "Детали" }).click();
   await page.getByLabel("Деталь", { exact: true }).selectOption("G200");
   await page
     .getByRole("button", { name: "Добавить в план", exact: true })
@@ -281,7 +283,7 @@ test("Нулевой остаток: настоящий отказ резерв�
     page.getByText("Не зарезервировано", { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Подготовить выезд", exact: true }),
+    page.getByRole("button", { name: "Подготовить карточку", exact: true }),
   ).toBeDisabled();
 });
 
@@ -314,7 +316,7 @@ test("Неизвестная машина остаётся вне реестра
     page.getByText("Зафиксирован маршрут менеджеру.", { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Подготовить выезд", exact: true }),
+    page.getByRole("button", { name: "Подготовить карточку", exact: true }),
   ).toBeDisabled();
 });
 
@@ -409,6 +411,6 @@ async function createThroughForm(page: Page, sender: string, text: string) {
     .getByRole("button", { name: "Сохранить и разобрать", exact: true })
     .click();
   await expect(
-    page.getByRole("tab", { name: "Обращение и машина", exact: true }),
+    page.getByRole("tab", { name: "Обращение", exact: true }),
   ).toBeVisible();
 }

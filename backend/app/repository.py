@@ -1,7 +1,8 @@
 import json
 
+from .answers import answer_status
 from .db import DomainError, audit, encode, now, require_ticket, touch
-from .extraction import LABELS, combine, extract
+from .extraction import LABELS, combine, extract, message_analysis
 from .inventory import plans_for
 from .matching import client_name, match_equipment
 from .readiness import assess
@@ -12,10 +13,12 @@ def all_equipment(conn):
     return [dict(e) for e in conn.execute('SELECT * FROM equipment ORDER BY client,id')]
 
 
-def effective_analysis(messages, data):
-    result = combine(messages)
+def effective_analysis(messages, data, machine=None):
+    result = combine(messages, machine)
     if data.get('issue_types'):
         result['symptoms'] = list(dict.fromkeys(data['issue_types']))
+        # Manual categorisation resolves only an unrecognised category, not contradictions.
+        result['uncertainties'] = [u for u in result['uncertainties'] if u.get('kind') != 'incomplete']
     return result
 
 
@@ -55,13 +58,21 @@ def possible_duplicates(conn, ticket, messages, analysis, equipment):
             continue
         if ticket['equipment_id'] and row['equipment_id'] and ticket['equipment_id'] != row['equipment_id']:
             continue
+        other_eq = conn.execute('SELECT serial FROM equipment WHERE id=?', (row['equipment_id'],)).fetchone()
+        if analysis['serials'] and other_eq and other_eq['serial'] not in analysis['serials']:
+            continue
+        if other['serials'] and equipment and equipment['serial'] not in other['serials']:
+            continue
         common = set(analysis['symptoms']) & set(other['symptoms']) - {'unknown', 'request'}
-        if not common:
+        correction = set(analysis.get('negated_symptoms', [])) & set(other['symptoms'])
+        correction |= set(other.get('negated_symptoms', [])) & set(analysis['symptoms'])
+        if not common and not correction:
             continue
         # Distinct problems on one machine remain separate; overlap alone is only a suggestion.
         result.append({'id': row['id'], 'label': f'КСР-{row["id"]:03d}', 'sender': others[0]['sender'],
                        'text': others[0]['text'], 'external_id': others[0]['external_id'],
-                       'reason': 'Совпадают клиент, возможная машина и тема: ' + ', '.join(LABELS[s] for s in sorted(common)),
+                       'reason': ('Уточнение отменяет прежний симптом: ' + ', '.join(LABELS[s] for s in sorted(correction))) if correction and not common else
+                                 'Совпадают клиент, возможная машина и тема: ' + ', '.join(LABELS[s] for s in sorted(common)),
                        'revision': row['revision']})
     return result
 
@@ -70,17 +81,17 @@ def detail(conn, ticket_id, with_duplicates=True):
     ticket = require_ticket(conn, ticket_id)
     data = json.loads(ticket['data'])
     messages = [dict(m) for m in conn.execute('SELECT * FROM messages WHERE ticket_id=? ORDER BY id', (ticket_id,))]
-    analysis = effective_analysis(messages, data)
+    eq = conn.execute('SELECT * FROM equipment WHERE id=?', (ticket['equipment_id'],)).fetchone()
+    eq = dict(eq) if eq else None
+    analysis = effective_analysis(messages, data, eq['serial'] if eq else None)
     sender = messages[0]['sender'] if messages else ''
     text = '\n'.join(m['text'] for m in messages)
     matching = match_equipment(analysis, sender, text, all_equipment(conn))
-    eq = conn.execute('SELECT * FROM equipment WHERE id=?', (ticket['equipment_id'],)).fetchone()
-    eq = dict(eq) if eq else None
     plans = plans_for(conn, ticket_id, eq)
     duplicates = possible_duplicates(conn, ticket, messages, analysis, eq) if with_duplicates else []
     readiness = assess(ticket, data, messages, analysis, matching, eq, plans, duplicates)
     for m in messages:
-        m['analysis'] = json.loads(m['analysis'])
+        m['analysis'] = message_analysis(m)
     return {**ticket, 'label': f'КСР-{ticket_id:03d}', 'data': data, 'messages': messages,
             'analysis': analysis, 'matching': matching, 'equipment': eq, 'plans': plans,
             'duplicates': duplicates, 'readiness': readiness,
@@ -129,10 +140,28 @@ def patch_ticket(conn, ticket_id, body, actor):
             raise DomainError('equipment_not_found', 'Машина отсутствует в реестре.', 404)
         if eqid != ticket['equipment_id']:
             conn.execute('DELETE FROM part_plans WHERE ticket_id=?', (ticket_id,))
-            data.update(equipment_confirmed=False, address_confirmed=False, plan_confirmed=False)
+            data.update(equipment_confirmed=False, address_confirmed=False, symptom_confirmed=False, plan_confirmed=False, answers={}, answer_records={})
+            data.pop('issue_types', None)
             conn.execute('UPDATE tickets SET equipment_id=? WHERE id=?', (eqid, ticket_id))
     if 'answers' in changes:
-        data['answers'] = {**data.get('answers', {}), **(changes.pop('answers') or {})}
+        answers = changes.pop('answers') or {}
+        data.setdefault('answers', {})
+        data.setdefault('answer_records', {})
+        for key, value in answers.items():
+            record = {'text': value, 'status': answer_status(value), 'source': 'dispatcher'} if isinstance(value, str) else dict(value)
+            if record['status'] == 'answered':
+                record['status'] = answer_status(record['text'])
+            if record['source'] == 'message':
+                message = conn.execute('SELECT text FROM messages WHERE id=? AND ticket_id=?', (record.get('message_id'), ticket_id)).fetchone()
+                if not message or not record['text'] or record['text'] not in message['text']:
+                    raise DomainError('answer_source_invalid', 'Укажите точный фрагмент сообщения этой заявки.')
+            elif record.get('message_id') is not None:
+                raise DomainError('answer_source_invalid', 'Ссылка на сообщение допустима только для ответа из сообщения.')
+            record.update(actor=actor, at=now())
+            data['answers'][key] = record['text']
+            data['answer_records'][key] = record
+            conn.execute('INSERT INTO answer_events(ticket_id,question_key,status,text,source,message_id,actor,created_at) VALUES(?,?,?,?,?,?,?,?)',
+                         (ticket_id, key, record['status'], record['text'], record['source'], record.get('message_id'), actor, record['at']))
     data.update(changes)
     touch(conn, ticket_id, data)
     audit(conn, 'ticket_updated', {'changes': body.model_dump(exclude_unset=True, mode='json')}, ticket_id, actor)
@@ -155,18 +184,21 @@ def merge_ticket(conn, source_id, body, actor):
     target_analysis = effective_analysis([dict(m) for m in conn.execute('SELECT * FROM messages WHERE ticket_id=? ORDER BY id', (body.target_id,))], json.loads(target['data']))
     source_issues = set(source_analysis['symptoms']) - {'unknown', 'request'}
     target_issues = set(target_analysis['symptoms']) - {'unknown', 'request'}
-    if source_issues and target_issues and not source_issues & target_issues:
+    correction = (source_issues & set(target_analysis.get('negated_symptoms', []))) | (target_issues & set(source_analysis.get('negated_symptoms', [])))
+    if source_issues and target_issues and not source_issues & target_issues and not correction:
         raise DomainError('different_problem', 'Это разные проблемы. Оставьте отдельные заявки на выезд.')
     if source_analysis['serials'] and target_analysis['serials'] and set(source_analysis['serials']) != set(target_analysis['serials']):
         raise DomainError('different_equipment', 'В сообщениях разные номера машин. Объединение запрещено.')
     if conn.execute('SELECT 1 FROM part_plans WHERE ticket_id=?', (source_id,)).fetchone():
         raise DomainError('source_has_parts', 'Сначала удалите план деталей объединяемой заявки. Резервы не переносятся автоматически.')
     conn.execute('UPDATE messages SET ticket_id=? WHERE ticket_id=?', (body.target_id, source_id))
+    conn.execute('UPDATE answer_events SET ticket_id=? WHERE ticket_id=?', (body.target_id, source_id))
     if not target['equipment_id'] and source['equipment_id']:
         conn.execute('UPDATE tickets SET equipment_id=? WHERE id=?', (source['equipment_id'], body.target_id))
     data = json.loads(target['data'])
     data.update(symptom_confirmed=False, equipment_confirmed=False, address_confirmed=False, plan_confirmed=False)
     data['answers'] = {}  # New evidence requires confirmation; old answers remain in audit.
+    data['answer_records'] = {}
     data.pop('duplicate_resolution', None)
     touch(conn, body.target_id, data)
     conn.execute("UPDATE tickets SET state='merged',merged_into=?,prepared_revision=NULL,revision=revision+1,updated_at=? WHERE id=?",

@@ -16,6 +16,10 @@ export type Check = {
   passed: boolean;
   detail: string;
   rule: string;
+  state: "completed" | "action_required" | "not_required" | "insufficient_data";
+  reason: string;
+  next_action: string;
+  basis: "case" | "product" | "mixed";
 };
 export type Question = {
   key: string;
@@ -24,6 +28,9 @@ export type Question = {
   suggested: string;
   answer: string;
   resolved: boolean;
+  status: "unanswered" | "unknown" | "answered";
+  basis: "case" | "product";
+  provenance: { source: string; actor?: string; at?: string; message_id?: number };
 };
 export type Warranty = {
   required: boolean;
@@ -35,6 +42,12 @@ export type Analysis = {
   serials: string[];
   codes: string[];
   symptoms: string[];
+  current_symptoms?: string[];
+  negated_symptoms?: string[];
+  past_symptoms?: string[];
+  suspected_symptoms?: string[];
+  assertions?: { symptom: string; status: string; quote: string; machine: string | null; provider?: string; source_ref?: string }[];
+  uncertainties?: { kind: string; quote: string; question: string; machine?: string | null }[];
   facts: Record<string, string>;
   unsafe_request: boolean;
   evidence: {
@@ -149,6 +162,7 @@ export type Ticket = {
     blockers: Check[];
     passed: number;
     total: number;
+    not_required: number;
     questions: Question[];
     warranty: Warranty;
     status: string;

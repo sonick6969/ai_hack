@@ -73,6 +73,6 @@ export const statusLabel = (status: string) =>
   ({
     blocked: "Нужна подготовка",
     review: "Можно подготовить",
-    ready: "Готово к выезду",
+    ready: "Карточка готова к передаче",
     manager: "Менеджеру",
   })[status] ?? status;

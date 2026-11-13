@@ -1,0 +1,1184 @@
+{
+  "baseline_commit": "31166322326f85b7203aee8f345cf50b704b8272",
+  "mode": "local, no live LLM",
+  "cases": 36,
+  "before_pass": 10,
+  "after_pass": 36,
+  "results": [
+    {
+      "id": "correction",
+      "text": "Машина 205 больше не течёт. Теперь только гудит при приготовлении",
+      "expected": {
+        "id": "correction",
+        "text": "Машина 205 больше не течёт. Теперь только гудит при приготовлении",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "two-negations",
+      "text": "Машина 205 не гудит и не течёт",
+      "expected": {
+        "id": "two-negations",
+        "text": "Машина 205 не гудит и не течёт",
+        "current": [],
+        "negated": [
+          "leak",
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [
+          "leak",
+          "noise"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "colloquial-drip",
+      "text": "Машина 119 льёт кофе по капле",
+      "expected": {
+        "id": "colloquial-drip",
+        "text": "Машина 119 льёт кофе по капле",
+        "current": [
+          "flow"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "flow"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "contrast",
+      "text": "205 не течёт, но гудит на нагреве",
+      "expected": {
+        "id": "contrast",
+        "text": "205 не течёт, но гудит на нагреве",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "reverse-contrast",
+      "text": "Машина 205 течёт, но не гудит",
+      "expected": {
+        "id": "reverse-contrast",
+        "text": "Машина 205 течёт, но не гудит",
+        "current": [
+          "leak"
+        ],
+        "negated": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [
+          "noise"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "negated-location",
+      "text": "Машина 205 течёт не слева, а справа",
+      "expected": {
+        "id": "negated-location",
+        "text": "Машина 205 течёт не слева, а справа",
+        "current": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "negation-chain",
+      "text": "Машина 205 не течёт и гудит при приготовлении",
+      "expected": {
+        "id": "negation-chain",
+        "text": "Машина 205 не течёт и гудит при приготовлении",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "neither",
+      "text": "Машина 205 ни течёт, ни гудит",
+      "expected": {
+        "id": "neither",
+        "text": "Машина 205 ни течёт, ни гудит",
+        "current": [],
+        "negated": [
+          "leak",
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [
+          "leak",
+          "noise"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "past",
+      "text": "Вчера машина 205 текла, сейчас всё в порядке",
+      "expected": {
+        "id": "past",
+        "text": "Вчера машина 205 текла, сейчас всё в порядке",
+        "current": [],
+        "past": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [
+          "leak"
+        ],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "past-and-current",
+      "text": "Раньше машина 205 гудела. Сегодня течёт снизу",
+      "expected": {
+        "id": "past-and-current",
+        "text": "Раньше машина 205 гудела. Сегодня течёт снизу",
+        "current": [
+          "leak"
+        ],
+        "past": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [
+          "noise"
+        ],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "stopped",
+      "text": "Машина 205 перестала течь, зато теперь гудит",
+      "expected": {
+        "id": "stopped",
+        "text": "Машина 205 перестала течь, зато теперь гудит",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "hypothesis",
+      "text": "Кажется, машина 205 подтекает",
+      "expected": {
+        "id": "hypothesis",
+        "text": "Кажется, машина 205 подтекает",
+        "current": [],
+        "suspected": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": [
+          "leak"
+        ]
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "diagnosis-not-symptom",
+      "text": "Наверное, сломался насос. Машина 205 гудит",
+      "expected": {
+        "id": "diagnosis-not-symptom",
+        "text": "Наверное, сломался насос. Машина 205 гудит",
+        "current": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "local-guess",
+      "text": "Машина 205 течёт, возможно ещё гудит",
+      "expected": {
+        "id": "local-guess",
+        "text": "Машина 205 течёт, возможно ещё гудит",
+        "current": [
+          "leak"
+        ],
+        "suspected": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": [
+          "noise"
+        ]
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "multiple-machines",
+      "text": "Машина 205 не течёт, а машина 119 гудит",
+      "expected": {
+        "id": "multiple-machines",
+        "text": "Машина 205 не течёт, а машина 119 гудит",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "leak"
+        ],
+        "machines": {
+          "205": [],
+          "119": [
+            "noise"
+          ]
+        }
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "multiple-sentences",
+      "text": "На машине 205 течь. Машина 119 не гудит",
+      "expected": {
+        "id": "multiple-sentences",
+        "text": "На машине 205 течь. Машина 119 не гудит",
+        "current": [
+          "leak"
+        ],
+        "negated": [
+          "noise"
+        ],
+        "machines": {
+          "205": [
+            "leak"
+          ],
+          "119": []
+        }
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [
+          "noise"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "short-subject",
+      "text": "205 течёт, 119 не гудит",
+      "expected": {
+        "id": "short-subject",
+        "text": "205 течёт, 119 не гудит",
+        "current": [
+          "leak"
+        ],
+        "negated": [
+          "noise"
+        ],
+        "machines": {
+          "205": [
+            "leak"
+          ],
+          "119": []
+        }
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [
+          "noise"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "coffee-trickle",
+      "text": "На 119 кофе еле идёт тонкой струйкой",
+      "expected": {
+        "id": "coffee-trickle",
+        "text": "На 119 кофе еле идёт тонкой струйкой",
+        "current": [
+          "flow"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "flow"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "flow"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "coffee-drips",
+      "text": "Кофе из носиков капает по капле на машине 119",
+      "expected": {
+        "id": "coffee-drips",
+        "text": "Кофе из носиков капает по капле на машине 119",
+        "current": [
+          "flow"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "flow"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "leak-drips",
+      "text": "Машина 205 капает из-под поддона",
+      "expected": {
+        "id": "leak-drips",
+        "text": "Машина 205 капает из-под поддона",
+        "current": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "not-no-coffee",
+      "text": "Машина 108 не выдаёт кофе, но не течёт",
+      "expected": {
+        "id": "not-no-coffee",
+        "text": "Машина 108 не выдаёт кофе, но не течёт",
+        "current": [
+          "error"
+        ],
+        "negated": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "error"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "error"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "no-noise",
+      "text": "На машине 205 шума нет, вода появляется справа",
+      "expected": {
+        "id": "no-noise",
+        "text": "На машине 205 шума нет, вода появляется справа",
+        "current": [
+          "leak"
+        ],
+        "negated": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [
+          "noise"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "no-leak",
+      "text": "На машине 205 течи нет, только гул",
+      "expected": {
+        "id": "no-leak",
+        "text": "На машине 205 течи нет, только гул",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "punctuation",
+      "text": "Машина 205: НЕ ТЕЧЁТ! ГУДИТ?",
+      "expected": {
+        "id": "punctuation",
+        "text": "Машина 205: НЕ ТЕЧЁТ! ГУДИТ?",
+        "current": [],
+        "negated": [
+          "leak"
+        ],
+        "uncertain": true
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [
+          "leak"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": [
+          "noise"
+        ]
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "contradiction",
+      "text": "Машина 205 течёт и не течёт",
+      "expected": {
+        "id": "contradiction",
+        "text": "Машина 205 течёт и не течёт",
+        "current": [],
+        "uncertain": true
+      },
+      "before": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": [
+          "leak"
+        ]
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "uncertain-client",
+      "text": "Машина 205 то ли течёт, то ли шумит",
+      "expected": {
+        "id": "uncertain-client",
+        "text": "Машина 205 то ли течёт, то ли шумит",
+        "current": [],
+        "uncertain": true
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": [
+          "leak",
+          "noise"
+        ]
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "incomplete",
+      "text": "Машина 205, ну опять это самое",
+      "expected": {
+        "id": "incomplete",
+        "text": "Машина 205, ну опять это самое",
+        "current": [],
+        "uncertain": true
+      },
+      "before": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "part-only",
+      "text": "Машина 205. Нужна помпа, кажется она сломалась",
+      "expected": {
+        "id": "part-only",
+        "text": "Машина 205. Нужна помпа, кажется она сломалась",
+        "current": [],
+        "uncertain": true
+      },
+      "before": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "whistle",
+      "text": "Машина 205 свистит при приготовлении",
+      "expected": {
+        "id": "whistle",
+        "text": "Машина 205 свистит при приготовлении",
+        "current": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "unknown"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "not-only",
+      "text": "Машина 205 не только течёт, но и гудит",
+      "expected": {
+        "id": "not-only",
+        "text": "Машина 205 не только течёт, но и гудит",
+        "current": [
+          "leak",
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak",
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "negative-history",
+      "text": "Раньше машина 205 не гудела, теперь гудит",
+      "expected": {
+        "id": "negative-history",
+        "text": "Раньше машина 205 не гудела, теперь гудит",
+        "current": [
+          "noise"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "request",
+      "text": "Машина 205. Пришлите инструкцию по разборке",
+      "expected": {
+        "id": "request",
+        "text": "Машина 205. Пришлите инструкцию по разборке",
+        "current": [
+          "request"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "request"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "request"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "maintenance",
+      "text": "Машина 207 работает нормально. Хотим заменить фильтр",
+      "expected": {
+        "id": "maintenance",
+        "text": "Машина 207 работает нормально. Хотим заменить фильтр",
+        "current": [
+          "maintenance"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "maintenance"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "maintenance"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "steam",
+      "text": "Машина 133: пар из крана идёт слабо, кофе нормальный",
+      "expected": {
+        "id": "steam",
+        "text": "Машина 133: пар из крана идёт слабо, кофе нормальный",
+        "current": [
+          "steam"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "steam"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "steam"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": "no-more-error",
+      "text": "Машина 108 больше не показывает E07, теперь гудит",
+      "expected": {
+        "id": "no-more-error",
+        "text": "Машина 108 больше не показывает E07, теперь гудит",
+        "current": [
+          "noise"
+        ],
+        "negated": [
+          "error"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "noise",
+          "error"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "noise"
+        ],
+        "negated_symptoms": [
+          "error"
+        ],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": "current-onset",
+      "text": "Машина 205 течёт с утра, вчера работала нормально",
+      "expected": {
+        "id": "current-onset",
+        "text": "Машина 205 течёт с утра, вчера работала нормально",
+        "current": [
+          "leak"
+        ]
+      },
+      "before": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "after": {
+        "symptoms": [
+          "leak"
+        ],
+        "negated_symptoms": [],
+        "past_symptoms": [],
+        "suspected_symptoms": []
+      },
+      "before_pass": true,
+      "after_pass": true
+    }
+  ]
+}

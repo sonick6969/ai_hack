@@ -1,0 +1,218 @@
+[
+  {
+    "width": 1440,
+    "section": "queue",
+    "checked": 325,
+    "min": 6.2,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "stock",
+    "checked": 207,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "imports",
+    "checked": 60,
+    "min": 6.07,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "rules",
+    "checked": 62,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "audit",
+    "checked": 162,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "message",
+    "checked": 150,
+    "min": 6.54,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "questions",
+    "checked": 120,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "parts",
+    "checked": 112,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1440,
+    "section": "card",
+    "checked": 127,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "queue",
+    "checked": 323,
+    "min": 6.2,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "stock",
+    "checked": 205,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "imports",
+    "checked": 57,
+    "min": 6.07,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "rules",
+    "checked": 60,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "audit",
+    "checked": 161,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "message",
+    "checked": 148,
+    "min": 6.54,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "questions",
+    "checked": 118,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "parts",
+    "checked": 110,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 1280,
+    "section": "card",
+    "checked": 125,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "queue",
+    "checked": 273,
+    "min": 6.2,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "stock",
+    "checked": 202,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "imports",
+    "checked": 54,
+    "min": 6.07,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "rules",
+    "checked": 57,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "audit",
+    "checked": 157,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "message",
+    "checked": 144,
+    "min": 6.54,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "questions",
+    "checked": 115,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "parts",
+    "checked": 107,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  },
+  {
+    "width": 390,
+    "section": "card",
+    "checked": 122,
+    "min": 6.69,
+    "overflow": false,
+    "failures": []
+  }
+]

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import {
   ArrowLeft,
@@ -38,6 +38,7 @@ import {
 } from "./ui";
 import { NewMessageForm } from "./App";
 import { JournalPage } from "./pages";
+import { clearDrafts, useDirtyDrafts, useDraftState } from "./drafts";
 
 type Perform = (
   endpoint: string,
@@ -46,11 +47,11 @@ type Perform = (
 ) => Promise<boolean>;
 type Tab = "message" | "questions" | "parts" | "card" | "audit";
 const tabs = [
-  { id: "message" as Tab, label: "Обращение и машина", icon: FileText },
-  { id: "questions" as Tab, label: "Уточнения", icon: CircleHelp },
-  { id: "parts" as Tab, label: "Выезд и детали", icon: Package },
-  { id: "card" as Tab, label: "Карточка инженера", icon: ClipboardCheck },
-  { id: "audit" as Tab, label: "Журнал", icon: History },
+  { id: "message" as Tab, label: "Обращение", number: "01", icon: FileText },
+  { id: "questions" as Tab, label: "Уточнения", number: "02", icon: CircleHelp },
+  { id: "parts" as Tab, label: "Детали", number: "03", icon: Package },
+  { id: "card" as Tab, label: "Карточка", number: "04", icon: ClipboardCheck },
+  { id: "audit" as Tab, label: "Журнал", number: "", icon: History },
 ];
 
 export default function TicketPage({
@@ -74,16 +75,21 @@ export default function TicketPage({
   const [equipment, setEquipment] = useState<Equipment[]>([]),
     [stock, setStock] = useState<Stock[]>([]);
   const [refresh, setRefresh] = useState(0);
+  const dirty = useDirtyDrafts(id);
+  const currentId = useRef(id);
+  currentId.current = id;
   useEffect(() => {
+    let active = true;
     setTicket(null);
     setError("");
     setTab("message");
     api<Ticket>(`/tickets/${id}`)
-      .then(setTicket)
-      .catch((e) => setError(errorText(e)));
+      .then(t => {if (active) setTicket(t);})
+      .catch((e) => {if (active) setError(errorText(e));});
     api<Equipment[]>("/equipment")
-      .then(setEquipment)
-      .catch((e) => setError(errorText(e)));
+      .then(rows => {if (active) setEquipment(rows);})
+      .catch((e) => {if (active) setError(errorText(e));});
+    return () => {active = false;};
   }, [id, refresh]);
   useEffect(() => {
     api<Stock[]>(
@@ -108,6 +114,10 @@ export default function TicketPage({
             : { body: JSON.stringify({ revision: ticket.revision, ...data }) }),
         },
       );
+      if (currentId.current !== id) {onChange(); return true;}
+      const section = endpoint === "" ? "answers" in data ? "questions" : "purpose" in data ? "parts" : "equipment_id" in data ? "machine" : "duplicates"
+        : endpoint === "/approval" ? "approval" : endpoint === "/merge" ? "duplicates" : endpoint === "/manager" ? "manager" : endpoint === "/parts" ? "parts-add" : endpoint.includes("/transfer") ? `transfer-${endpoint.split("/")[2]}` : "";
+      if (section) clearDrafts(ticket.id, section);
       setTicket(updated);
       onChange();
       if (updated.id !== id) onSelect(updated.id);
@@ -190,6 +200,7 @@ export default function TicketPage({
               </a>
             </div>
           </div>
+          {dirty && <div className="draft-banner" role="status"><FileText size={16} />Есть несохранённые изменения. Черновик сохранён в этой вкладке и доступен при переходе между разделами.</div>}
           <div className="ticket-layout">
             <div className="ticket-workspace">
               <div className="tabs" role="tablist" aria-label="Разделы заявки">
@@ -200,8 +211,11 @@ export default function TicketPage({
                     aria-selected={tab === item.id}
                     className={tab === item.id ? "active" : ""}
                     onClick={() => setTab(item.id)}
+                    aria-controls={`ticket-panel-${item.id}`}
+                    aria-label={item.label}
+                    id={`ticket-tab-${item.id}`}
                   >
-                    <item.icon size={15} />
+                    {item.number ? <span className="step-number">{item.number}</span> : <item.icon size={15} />}
                     {item.label}
                     {item.id === "questions" &&
                       ticket.readiness.questions.some((q) => !q.resolved) && (
@@ -216,7 +230,7 @@ export default function TicketPage({
                   </button>
                 ))}
               </div>
-              <div role="tabpanel" className="tab-content">
+              <div role="tabpanel" id={`ticket-panel-${tab}`} aria-labelledby={`ticket-tab-${tab}`} className="tab-content">
                 {tab === "message" && (
                   <>
                     <Messages ticket={ticket} />
@@ -328,7 +342,7 @@ export default function TicketPage({
 
 function Messages({ ticket }: { ticket: Ticket }) {
   return (
-    <section className="panel padded">
+    <section className="panel padded source-paper" id="source-messages">
       <SectionTitle number="01" title="Исходное обращение">
         <span className="tag">{ticket.messages.length} сообщ.</span>
       </SectionTitle>
@@ -356,6 +370,10 @@ function Messages({ ticket }: { ticket: Ticket }) {
             </div>
             <blockquote>{m.text}</blockquote>
             <span className="cell-source">Источник: {m.source_ref}</span>
+            <div className="processing-mode"><span className="tiny-dot" />{m.analysis.engine === "local+llm" && m.analysis.llm_status === "ok" ? "Обработано: локальный разбор + LLM" : "Обработано: локальный разбор"}
+              {m.analysis.llm_status === "disabled" && " · LLM выключена"}
+              {m.analysis.llm_status === "legacy_reparsed" && " · обновлён разбор сохранённого сообщения"}
+            </div>
             {m.analysis.llm_status?.includes("fallback") && (
               <Notice kind="warning">
                 LLM не вернула пригодный ответ. Использован локальный разбор;
@@ -395,7 +413,7 @@ function Messages({ ticket }: { ticket: Ticket }) {
             <strong>{ticket.analysis.codes.join(", ") || "Не указан"}</strong>
           </div>
         </div>
-        {Object.entries(ticket.analysis.facts).length > 0 && (
+        {(ticket.analysis.evidence.length > 0 || !!ticket.analysis.assertions?.length) && (
           <details className="technical-details">
             <summary>
               Извлечённые фрагменты и происхождение <ChevronDown size={14} />
@@ -409,8 +427,10 @@ function Messages({ ticket }: { ticket: Ticket }) {
                 </span>
               </p>
             ))}
+            {ticket.analysis.assertions?.map((a, i) => <p key={`assertion-${i}`}><strong>{({current:"Текущий симптом",negated:"Отрицается",past:"В прошлом",suspected:"Предположение"} as Record<string,string>)[a.status]}</strong> · {a.machine ? `№ ${a.machine} · ` : ""}«{a.quote}» <span className="cell-source">{a.source_ref}{a.provider === "llm" ? " · LLM" : " · локально"}</span></p>)}
           </details>
         )}
+        {!!ticket.analysis.uncertainties?.length && <div className="extraction-uncertainties">{ticket.analysis.uncertainties.map((u,i) => <Notice kind="warning" key={i}>{u.question}</Notice>)}</div>}
       </div>
       {ticket.analysis.unsafe_request && (
         <Notice kind="warning">
@@ -434,13 +454,11 @@ function Machine({
   perform: Perform;
   busy: boolean;
 }) {
-  const [chosen, setChosen] = useState(ticket.equipment_id ?? "");
-  const [resolution, setResolution] = useState(
-    ticket.data.identity_resolution ?? "",
-  );
-  const [manual, setManual] = useState(false),
-    [manager, setManager] = useState(false),
-    [note, setNote] = useState("");
+  const [chosen, setChosen] = useDraftState(ticket.id, "machine", "chosen", ticket.equipment_id ?? "");
+  const [resolution, setResolution] = useDraftState(ticket.id, "machine", "resolution", ticket.data.identity_resolution ?? "");
+  const [manual, setManual] = useState(!!chosen && !ticket.matching.candidates.some(c => c.id === chosen));
+  const [note, setNote] = useDraftState(ticket.id, "manager", "note", "");
+  const [manager, setManager] = useState(!!note);
   const confirmed =
     ticket.data.equipment_confirmed && ticket.data.address_confirmed;
   const candidates = manual ? equipment : ticket.matching.candidates;
@@ -458,8 +476,8 @@ function Machine({
     );
   };
   return (
-    <section className="panel padded">
-      <SectionTitle number="02" title="Конкретная машина">
+    <section className="panel padded machine-passport" id="machine-fields">
+      <SectionTitle title="Конкретная машина">
         {confirmed && (
           <span className="badge status-ready">
             <Check size={13} />
@@ -631,15 +649,15 @@ function Duplicates({
   busy: boolean;
 }) {
   const [selected, setSelected] = useState<number | null>(null),
-    [reason, setReason] = useState("");
-  const [separate, setSeparate] = useState(
+    [reason, setReason] = useDraftState(ticket.id, "duplicates", "reason", "");
+  const [separate, setSeparate] = useDraftState(ticket.id, "duplicates", "separate",
     ticket.data.duplicate_resolution ?? "",
   );
   const [expanded, setExpanded] = useState(false);
   const duplicate = ticket.duplicates.find((d) => d.id === selected);
   if (!ticket.duplicates.length) return null;
   return (
-    <section className="panel padded">
+    <section className="panel padded" id="duplicate-fields">
       <SectionTitle title="Повторы и уточнения">
         <span className="count-pill">{ticket.duplicates.length}</span>
       </SectionTitle>
@@ -756,29 +774,30 @@ function Questions({
   perform: Perform;
   busy: boolean;
 }) {
-  const [symptom, setSymptom] = useState(
+  const [symptom, setSymptom] = useDraftState(ticket.id, "questions", "symptom",
     ticket.data.symptom ?? ticket.messages[0].text,
   );
-  const [confirmed, setConfirmed] = useState(
+  const [confirmed, setConfirmed] = useDraftState(ticket.id, "questions", "confirmed",
     ticket.data.symptom_confirmed ?? false,
   );
-  const [issues, setIssues] = useState(ticket.analysis.symptoms);
-  const [answers, setAnswers] = useState<Record<string, string>>(() =>
+  const [issues, setIssues] = useDraftState(ticket.id, "questions", "issues", ticket.analysis.symptoms);
+  const [answers, setAnswers] = useDraftState<Record<string, string>>(ticket.id, "questions", "answers",
     Object.fromEntries(
       ticket.readiness.questions.map((q) => [q.key, q.answer || q.suggested]),
     ),
   );
+  const [answerStates, setAnswerStates] = useDraftState<Record<string, string>>(ticket.id, "questions", "states", Object.fromEntries(ticket.readiness.questions.map(q => [q.key, q.status])));
   const save = (e: FormEvent) => {
     e.preventDefault();
     void perform(
       "",
-      { symptom, symptom_confirmed: confirmed, answers, issue_types: issues },
+      { symptom, symptom_confirmed: confirmed, answers: Object.fromEntries(Object.entries(answers).map(([key,text]) => [key, {text, status: answerStates[key] === "unknown" ? "unknown" : "answered", source: "dispatcher"}])), issue_types: issues },
       "PATCH",
     );
   };
   return (
-    <section className="panel padded">
-      <SectionTitle number="03" title="Уточнения и подтверждения">
+    <section className="panel padded" id="question-fields">
+      <SectionTitle number="02" title="Уточнения и подтверждения">
         <span className="tag">
           {ticket.readiness.questions.filter((q) => q.resolved).length} /{" "}
           {ticket.readiness.questions.length}
@@ -852,18 +871,17 @@ function Questions({
           Описание симптома проверено диспетчером
         </label>
         {ticket.readiness.questions.map((q, i) => (
-          <div className="question-field" key={q.key}>
+          <div className="question-field" id={`question-${q.key}`} key={q.key}>
             <span className={`question-index ${q.resolved ? "done" : ""}`}>
               {q.resolved ? <Check size={14} /> : i + 1}
             </span>
             <label>
               {q.question}
+              <span className="question-basis">{q.basis === "case" ? "Правило компании · П-5" : "Уточнение для подготовки"}</span>
               <input
                 aria-label={q.question}
                 value={answers[q.key] ?? ""}
-                onChange={(e) =>
-                  setAnswers((a) => ({ ...a, [q.key]: e.target.value }))
-                }
+                onChange={(e) => {setAnswers((a) => ({ ...a, [q.key]: e.target.value })); setAnswerStates(a => ({...a,[q.key]:"answered"}));}}
                 maxLength={1000}
                 placeholder={q.hint}
               />
@@ -872,6 +890,8 @@ function Questions({
                   ? `Из сообщения: «${q.suggested}». Проверьте перед сохранением.`
                   : q.hint}
               </small>
+              <span className="answer-tools"><button className={`text-button unknown-answer ${answerStates[q.key] === "unknown" ? "selected" : ""}`} aria-pressed={answerStates[q.key] === "unknown"} type="button" onClick={() => setAnswerStates(a => ({...a,[q.key]:"unknown"}))}><CircleHelp size={15} />Ответ пока неизвестен</button>{answerStates[q.key] === "unknown" && !!answers[q.key]?.trim() && <button className="text-button" type="button" onClick={() => setAnswerStates(a => ({...a,[q.key]:"answered"}))}>Использовать записанный ответ</button>}<span className="answer-state">{answerStates[q.key] === "unknown" ? "Неизвестно · вопрос остаётся открытым" : q.resolved ? "Ответ получен" : "Нужно получить ответ"}</span></span>
+              {q.provenance?.at && <span className="cell-source">Записал: {q.provenance.actor} · {dateTime(q.provenance.at)} · {q.provenance.source === "client" ? "со слов клиента" : "диспетчер"}</span>}
             </label>
           </div>
         ))}
@@ -911,20 +931,20 @@ function Parts({
   perform: Perform;
   busy: boolean;
 }) {
-  const [purpose, setPurpose] = useState(ticket.data.purpose ?? "diagnostic"),
-    [note, setNote] = useState(ticket.data.purpose_note ?? "");
-  const [visit, setVisit] = useState(ticket.data.visit_date ?? ""),
-    [uncertainties, setUncertainties] = useState(
+  const [purpose, setPurpose] = useDraftState(ticket.id, "parts", "purpose", ticket.data.purpose ?? "diagnostic"),
+    [note, setNote] = useDraftState(ticket.id, "parts", "note", ticket.data.purpose_note ?? "");
+  const [visit, setVisit] = useDraftState(ticket.id, "parts", "visit", ticket.data.visit_date ?? ""),
+    [uncertainties, setUncertainties] = useDraftState(ticket.id, "parts", "uncertainties",
       ticket.data.uncertainties ?? "",
     );
-  const [confirmed, setConfirmed] = useState(
+  const [confirmed, setConfirmed] = useDraftState(ticket.id, "parts", "confirmed",
     ticket.data.plan_confirmed ?? false,
   );
-  const [sku, setSku] = useState(""),
-    [warehouse, setWarehouse] = useState(
+  const [sku, setSku] = useDraftState(ticket.id, "parts-add", "sku", ""),
+    [warehouse, setWarehouse] = useDraftState(ticket.id, "parts-add", "warehouse",
       ticket.equipment?.address.startsWith("Тула") ? "Тула" : "Москва",
     ),
-    [quantity, setQuantity] = useState(1);
+    [quantity, setQuantity] = useDraftState(ticket.id, "parts-add", "quantity", 1);
   const [showAll, setShowAll] = useState(false);
   const skus = [
     ...new Set(stock.filter((s) => showAll || s.compatible).map((s) => s.sku)),
@@ -948,8 +968,8 @@ function Parts({
   };
   return (
     <>
-      <section className="panel padded">
-        <SectionTitle number="04" title="Цель визита" />
+      <section className="panel padded" id="purpose-fields">
+        <SectionTitle number="03" title="Цель визита" />
         <form onSubmit={save} className="form-stack">
           <div className="purpose-options">
             {[
@@ -961,12 +981,12 @@ function Parts({
               {
                 id: "repair",
                 label: "Ремонт",
-                text: "С подготовленными деталями",
+                text: "Работы по согласованному плану",
               },
               {
                 id: "maintenance",
                 label: "Обслуживание",
-                text: "Плановая замена",
+                text: "Проверка, настройка, обслуживание",
               },
             ].map((p) => (
               <label className={purpose === p.id ? "selected" : ""} key={p.id}>
@@ -1033,8 +1053,8 @@ function Parts({
           </button>
         </form>
       </section>
-      <section className="panel padded">
-        <SectionTitle number="05" title="Детали и склад получения">
+      <section className="panel padded" id="parts-fields">
+        <SectionTitle title="Детали и склад получения">
           <span className="tag">{ticket.plans.length} поз.</span>
         </SectionTitle>
         <Notice>
@@ -1078,7 +1098,7 @@ function Parts({
                     </button>
                   </div>
                   {plan.transfer_required && (
-                    <TransferForm plan={plan} busy={busy} perform={perform} />
+                    <TransferForm ticketId={ticket.id} plan={plan} busy={busy} perform={perform} />
                   )}
                 </div>
               ))}
@@ -1108,7 +1128,7 @@ function Parts({
             <Package size={22} />
             <div>
               <strong>Детали пока не запланированы</strong>
-              <p>Для диагностики без деталей подтвердите это в плане выезда.</p>
+              <p>Работы без замены деталей допустимы. Опишите их в плане выезда.</p>
             </div>
           </div>
         )}
@@ -1217,16 +1237,18 @@ function Parts({
 }
 
 function TransferForm({
+  ticketId,
   plan,
   perform,
   busy,
 }: {
+  ticketId: number;
   plan: Plan;
   perform: Perform;
   busy: boolean;
 }) {
-  const [date, setDate] = useState(plan.available_on ?? ""),
-    [note, setNote] = useState(plan.transfer_note);
+  const [date, setDate] = useDraftState(ticketId, `transfer-${plan.id}`, "date", plan.available_on ?? ""),
+    [note, setNote] = useDraftState(ticketId, `transfer-${plan.id}`, "note", plan.transfer_note);
   return (
     <div className="transfer-box">
       <div>
@@ -1299,9 +1321,9 @@ function Readiness({
   busy: boolean;
   setTab: (tab: Tab) => void;
 }) {
-  const [name, setName] = useState(""),
-    [note, setNote] = useState(""),
-    [approvalOpen, setApprovalOpen] = useState(false);
+  const [name, setName] = useDraftState(ticket.id, "approval", "name", ""),
+    [note, setNote] = useDraftState(ticket.id, "approval", "note", ""),
+    [approvalOpen, setApprovalOpen] = useState(!!name || !!note);
   const readiness = ticket.readiness;
   const checklistTab = (key: string): Tab =>
     ["registry", "identity", "identity_conflict", "duplicates"].includes(key)
@@ -1309,6 +1331,20 @@ function Readiness({
       : ["symptom", "questions", "safe_actions"].includes(key)
         ? "questions"
         : "parts";
+  const jump = (key: string) => {
+    if (key === "approval") { setApprovalOpen(true); setTimeout(() => document.querySelector<HTMLInputElement>(".warranty-card input")?.focus(), 60); return; }
+    setTab(checklistTab(key));
+    const target = ["registry", "identity", "identity_conflict"].includes(key) ? "machine-fields"
+      : key === "duplicates" ? "duplicate-fields" : ["symptom", "questions", "safe_actions"].includes(key) ? "question-fields"
+      : key === "purpose" ? "purpose-fields" : "parts-fields";
+    setTimeout(() => {
+      const node = document.getElementById(target);
+      node?.scrollIntoView({block:"start"});
+      node?.querySelector<HTMLInputElement>("input:not(:disabled), textarea:not(:disabled), select:not(:disabled), button:not(:disabled)")?.focus({preventScroll:true});
+    }, 60);
+  };
+  const completed = readiness.checks.filter(c => c.state === "completed");
+  const notRequired = readiness.checks.filter(c => c.state === "not_required");
   return (
     <aside className="readiness-sidebar">
       <section
@@ -1325,22 +1361,22 @@ function Readiness({
           <span className="mini-label">ПРОВЕРКА ГОТОВНОСТИ</span>
           <h2>
             {readiness.ready
-              ? "Можно выезжать"
+              ? "Карточка готова к передаче"
               : readiness.can_prepare
-                ? "Всё для подготовки есть"
-                : "Подготовим без пробелов"}
+                ? "Данные для карточки собраны"
+                : "Что сделать дальше"}
           </h2>
           <p>
             {readiness.ready
-              ? "Карточка соответствует текущей версии заявки."
+              ? "Версия актуальна. Назначение инженера и время выезда согласуются отдельно."
               : readiness.can_prepare
                 ? "Подтвердите подготовку и передайте карточку инженеру."
-                : "Сначала устраните препятствия, затем подтвердите выезд."}
+                : "Оставшиеся действия для подготовки карточки инженера."}
           </p>
           <div className="readiness-progress">
             <span
               style={{
-                width: `${(readiness.passed / readiness.total) * 100}%`,
+                width: `${readiness.total ? (readiness.passed / readiness.total) * 100 : 0}%`,
               }}
             />
           </div>
@@ -1348,25 +1384,29 @@ function Readiness({
             <strong>
               {readiness.passed} из {readiness.total}
             </strong>
-            <span>проверок пройдено</span>
+            <span>применимых проверок</span>
           </div>
         </div>
         <div className="readiness-checks">
-          {readiness.checks.map((c) => (
+          {readiness.blockers.length > 0 && <div className="remaining-label">НУЖНО СДЕЛАТЬ · {readiness.blockers.length}</div>}
+          {readiness.blockers.map((c, index) => (
             <button
               key={c.key}
-              className={`readiness-check ${c.passed ? "passed" : ""}`}
-              onClick={() => setTab(checklistTab(c.key))}
+              className={`readiness-check ${index === 0 ? "nearest-action" : ""}`}
+              onClick={() => jump(c.key)}
               title={`${c.rule}: ${c.detail}`}
             >
-              <Tick passed={c.passed} />
+              <span className="action-number">{String(index + 1).padStart(2,"0")}</span>
               <span>
-                {c.label}
-                <small>{c.rule}</small>
+                  <strong>{c.next_action}</strong>
+                <small>{c.reason}</small>
+                <span className="check-basis">{c.basis === "case" ? c.rule : c.basis === "mixed" ? "П-5 и дополнительные уточнения" : "Дополнительный контроль диспетчера"}</span>
               </span>
-              {!c.passed && <ArrowRight size={12} />}
+              <ArrowRight size={16} />
             </button>
           ))}
+          {completed.length > 0 && <details className="check-group"><summary><CheckCircle2 size={16} />Выполнено · {completed.length}<ChevronDown size={14} /></summary>{completed.map(c => <div className="resolved-check" key={c.key}><Tick passed /><span>{c.label}<small>{c.rule}</small></span></div>)}</details>}
+          {notRequired.length > 0 && <details className="check-group"><summary><span className="not-required-symbol">—</span>Не требуется · {notRequired.length}<ChevronDown size={14} /></summary><p className="muted small">Эти проверки не включены в показатель готовности.</p>{notRequired.map(c => <div className="resolved-check" key={c.key}><span className="not-required-symbol">—</span><span>{({compatibility:"Совместимость: детали не запланированы",reservation:"Резерв: детали не запланированы",transfer:"Перевоз между городами не нужен",approval:"Оснований для гарантийного согласования нет",duplicates:"Связанных открытых обращений нет",identity_conflict:"Противоречий идентификации нет",safe_actions:"Запроса самостоятельного ремонта нет",questions:"Обязательных уточнений для этого типа нет"} as Record<string,string>)[c.key] ?? c.label}<small>{c.rule}</small></span></div>)}</details>}
         </div>
         <div className="readiness-actions">
           <button
@@ -1379,7 +1419,7 @@ function Readiness({
             ) : (
               <CheckCircle2 size={18} />
             )}
-            {readiness.ready ? "Выезд подготовлен" : "Подготовить выезд"}
+            {readiness.ready ? "Карточка подготовлена" : "Подготовить карточку"}
           </button>
           <button className="button secondary" onClick={() => setTab("card")}>
             <FileText size={17} />
@@ -1387,8 +1427,7 @@ function Readiness({
           </button>
           {!readiness.can_prepare && (
             <small>
-              Препятствий: {readiness.blockers.length}. Нажмите на пункт, чтобы
-              перейти к исправлению.
+              Нажмите на действие, чтобы перейти к нужному полю.
             </small>
           )}
         </div>
@@ -1400,7 +1439,7 @@ function Readiness({
             <h3>Требуется согласование</h3>
           </div>
           <p>{readiness.warranty.reason}</p>
-          {ticket.data.approval?.revision === ticket.revision ? (
+          {ticket.data.approval?.revision === ticket.revision && readiness.checks.some(c => c.key === "approval" && c.state === "completed") ? (
             <div className="approval-record">
               <CheckCircle2 size={16} />
               <span>
@@ -1516,7 +1555,7 @@ function CardPreview({
         </div>
         <h2>Задание сервисному инженеру</h2>
         <div className={`paper-status ${card.ready ? "ready" : ""}`}>
-          {card.ready ? "ГОТОВО К ВЫЕЗДУ" : "ЧЕРНОВИК · ВЫЕЗД НЕ ПОДГОТОВЛЕН"}
+          {card.ready ? "КАРТОЧКА ГОТОВА К ПЕРЕДАЧЕ" : "ЧЕРНОВИК · КАРТОЧКА НЕ ПОДГОТОВЛЕНА"}
         </div>
         <h3>{card.equipment?.client ?? "Машина не определена"}</h3>
         <p>{card.equipment?.address ?? "Адрес не подтверждён"}</p>
@@ -1623,7 +1662,7 @@ function CardPreview({
             <h4>Препятствия к выезду</h4>
             <ul>
               {card.blockers.map((b) => (
-                <li key={b.key}>{b.label}</li>
+                  <li key={b.key}>{b.next_action} — {b.reason}</li>
               ))}
             </ul>
           </section>

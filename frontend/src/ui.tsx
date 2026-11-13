@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import {
   AlertCircle,
@@ -76,18 +76,30 @@ export function Modal({
   children: ReactNode;
   close: () => void;
 }) {
+  const dialog = useRef<HTMLElement>(null);
+  const closeRef = useRef(close);
+  closeRef.current = close;
   useEffect(() => {
+    const priorFocus = document.activeElement as HTMLElement | null;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") closeRef.current();
+      if (e.key === "Tab") {
+        const controls = Array.from(dialog.current?.querySelectorAll<HTMLElement>('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled),[tabindex="0"]') ?? []).filter(node => node.getClientRects().length);
+        const first = controls[0], last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+      }
     };
+    if (!dialog.current?.contains(document.activeElement)) dialog.current?.querySelector<HTMLElement>("input,textarea,button")?.focus();
     document.addEventListener("keydown", handler);
     const prior = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prior;
       document.removeEventListener("keydown", handler);
+      priorFocus?.focus();
     };
-  }, [close]);
+  }, []);
   return (
     <div
       className="modal-backdrop"
@@ -96,6 +108,7 @@ export function Modal({
       }}
     >
       <section
+        ref={dialog}
         className="modal"
         role="dialog"
         aria-modal="true"
@@ -145,4 +158,14 @@ export function SectionTitle({
       {children}
     </div>
   );
+}
+
+export function QueueArtwork() {
+  return <div className="queue-artwork" aria-hidden="true">
+    <div className="art-sky" />
+    <div className="art-photo"><img src="/assets/espresso-machine.jpg" alt="" width="683" height="1024" /><span>СЕРВИСНЫЙ ЦЕХ</span></div>
+    <svg className="art-scribble" viewBox="0 0 230 140" fill="none"><path d="M20 35C14 9 74 4 100 17c31 17-4 49-47 40C6 48 4 21 43 11M115 90c35-30 53-34 91-32m-19-14 19 14-22 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/><path d="m124 12 9 18 20-5-10 18 13 15-22-3-10 19-5-22-22-1 19-13Z" stroke="currentColor" strokeWidth="2" /></svg>
+    <span className="art-sticker">сначала детали<br/>обращения</span>
+    <span className="art-tape" />
+  </div>;
 }
